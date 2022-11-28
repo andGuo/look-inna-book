@@ -21,6 +21,7 @@ const Home = () => {
                 supabaseClient={supabase}
                 appearance={{ theme: ThemeSupa }}
                 showLinks={false}
+                redirectTo={'${host}/user'}
                 theme="dark"
               />
             ) : (

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { NextPage } from "next";
 import Head from "next/head";
-// import NavBar from './NavBar'
+import NavBar from "./NavBar";
 
 type Props = {
   children: React.ReactNode;
@@ -18,7 +18,7 @@ const Layout: NextPage<Props> = ({ children, title }) => {
       </Head>
       <div className="flex justify-center min-h-screen bg-gradient-to-br from-darkSecondary to-gray-700 text-darkPrimary">
         <div className="flex flex-col grow max-w-7xl">
-          {/* <NavBar /> */}
+          <NavBar />
           <div className="flex flex-col flex-grow justify-between">
             <div className="content">{children}</div>
             <footer className="flex justify-center align-middle content-start mt-4 mb-16 auto-cols-auto">
