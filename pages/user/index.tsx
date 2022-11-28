@@ -1,6 +1,6 @@
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import Layout from "../components/Layout";
+import Layout from "../../components/Layout";
 
 const Home = () => {
   const session = useSession();
