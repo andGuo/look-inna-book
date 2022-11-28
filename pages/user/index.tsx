@@ -8,15 +8,15 @@ const Home = () => {
 
   return (
     <Layout title="Login | Look-Inna-Book">
-      <div className="flex flex-wrap flex-col items-center justify-around sm:my-16 sm:flex-row sm:items-start sm:justify-center">
+      <div className="flex flex-wrap flex-col items-center justify-around sm:my-14 sm:flex-row sm:items-start sm:justify-center">
         <div className="lg:w-2/5 sm:w-1/2">
-          <div className="bg-neutral-800 pt-12 px-12 pb-10 rounded-3xl shadow-xl">
+          <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
             <h1 className="text-draculaGreen text-3xl pb-4 text-center">
               User Login
             </h1>
             {!session ? (
               <Auth
-                providers={["github", "google", "linkedin"]}
+                /*providers={["github", "google", "linkedin"]}*/
                 socialLayout="horizontal"
                 supabaseClient={supabase}
                 appearance={{ theme: ThemeSupa }}
