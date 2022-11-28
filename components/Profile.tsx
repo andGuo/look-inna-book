@@ -34,17 +34,31 @@ export default function Profile({ session }: { session: Session }) {
 
       let { data, error, status } = await supabase
         .from("profiles")
-        .select(`first_name, last_name`)
+        .select(
+          `first_name, last_name, user_address (
+            address, apartment_suite, country, city, state, zip_code, phone_number
+            )`
+        )
         .eq("profile_id", user.id)
         .single();
 
       if (error && status !== 406) {
         throw error;
       }
-
+      console.log(data);
       if (data) {
         setFname(data.first_name);
         setLname(data.last_name);
+        if (data.user_address) {
+          const arr = data.user_address;
+          setAddr(arr[0]);
+          setAptSuite(arr[1]);
+          setCountry(arr[2]);
+          setCity(arr[3]);
+          setState(arr[4]);
+          setZipCode(arr[5]);
+          setPhoneNum(arr[6]);
+        }
       }
     } catch (error) {
       alert("Error loading user data!");
@@ -55,10 +69,44 @@ export default function Profile({ session }: { session: Session }) {
   }
 
   async function updateProfile({
-    first_name, last_name, address, apartment_suite, country, city, state, zip_code, phone_number
+    first_name,
+    last_name,
   }: {
     first_name: Profiles["first_name"];
     last_name: Profiles["last_name"];
+  }) {
+    try {
+      setLoading(true);
+      if (!user) throw new Error("No user");
+      if (!first_name || !last_name) throw new Error("No fname or lname");
+
+      const profileUpdate = {
+        profile_id: user.id,
+        first_name,
+        last_name,
+      };
+
+      let { error } = await supabase.from("profiles").update(profileUpdate);
+
+      if (error) throw error;
+      alert("Profile updated!");
+    } catch (error) {
+      alert("Error updating profile data!");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function updateAddr({
+    address,
+    apartment_suite,
+    country,
+    city,
+    state,
+    zip_code,
+    phone_number,
+  }: {
     address: Address["address"];
     apartment_suite: Address["apartment_suite"];
     country: Address["country"];
@@ -70,19 +118,36 @@ export default function Profile({ session }: { session: Session }) {
     try {
       setLoading(true);
       if (!user) throw new Error("No user");
-      if (!fname || !lname) throw new Error("No fname or lname");
+      if (
+        !address ||
+        !apartment_suite ||
+        !country ||
+        !city ||
+        !state ||
+        !zip_code ||
+        !phone_number
+      )
+        throw new Error("Address Info Incomplete");
 
-      const updates = {
+      const userAddrUpdate = {
         profile_id: user.id,
-        first_name: fname,
-        last_name: lname,
+        address,
+        apartment_suite,
+        country,
+        city,
+        state,
+        zip_code,
+        phone_number,
       };
 
-      let { error } = await supabase.from("profiles").update(updates);
+      let { error } = await supabase
+        .from("user_address")
+        .upsert(userAddrUpdate);
+
       if (error) throw error;
-      alert("Profile updated!");
+      alert("Address updated!");
     } catch (error) {
-      alert("Error updating the data!");
+      alert("Error updating address data!");
       console.log(error);
     } finally {
       setLoading(false);
@@ -112,6 +177,20 @@ export default function Profile({ session }: { session: Session }) {
           value={lname || ""}
           onChange={(e) => setLname(e.target.value)}
         />
+      </div>
+      <div>
+        <button
+          className="button primary block"
+          onClick={() =>
+            updateProfile({
+              fname,
+              lname,
+            })
+          }
+          disabled={loading}
+        >
+          {loading ? "Loading ..." : "Update Profile"}
+        </button>
       </div>
       <div>
         <label htmlFor="address">Address</label>
@@ -179,10 +258,20 @@ export default function Profile({ session }: { session: Session }) {
       <div>
         <button
           className="button primary block"
-          onClick={() => updateProfile({ fname, lname, addr, aptSuite, country, city, state, zipCode, phoneNum })}
+          onClick={() =>
+            updateAddr({
+              addr,
+              aptSuite,
+              country,
+              city,
+              state,
+              zipCode,
+              phoneNum,
+            })
+          }
           disabled={loading}
         >
-          {loading ? "Loading ..." : "Update"}
+          {loading ? "Loading ..." : "Update Address"}
         </button>
       </div>
 

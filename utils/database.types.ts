@@ -353,8 +353,6 @@ export interface Database {
       user_address: {
         Row: {
           profile_id: string
-          first_name: string
-          last_name: string
           address: string
           apartment_suite: string | null
           country: string
@@ -365,8 +363,6 @@ export interface Database {
         }
         Insert: {
           profile_id: string
-          first_name: string
-          last_name: string
           address: string
           apartment_suite?: string | null
           country: string
@@ -377,8 +373,6 @@ export interface Database {
         }
         Update: {
           profile_id?: string
-          first_name?: string
-          last_name?: string
           address?: string
           apartment_suite?: string | null
           country?: string
