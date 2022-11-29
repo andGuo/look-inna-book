@@ -45,7 +45,7 @@ export default function Profile({ session }: { session: Session }) {
       if (error && status !== 406) {
         throw error;
       }
-      console.log(data);
+
       if (data) {
         setFname(data.first_name);
         setLname(data.last_name);
