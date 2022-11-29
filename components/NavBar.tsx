@@ -14,10 +14,10 @@ const NavBar = () => {
       <div className="flex items-center pr-1.5">
         <ul className="hidden sm:flex p-3 text-xl items-center justify-evenly">
           <li className="navBtn">
-            <Link href="/user/profile">Profile</Link>
+            <Link href="/user">Profile</Link>
           </li>
           <li className="navBtn">
-            <Link href="/user/">Login</Link>
+            <Link href="/checkout">Cart</Link>
           </li>
         </ul>
         <div className="sm:hidden">
@@ -74,7 +74,7 @@ const NavBar = () => {
         <div className="sm:hidden basis-full bg-lightPrimar mt-6 mb-4">
           <ul className="flex text-xl flex-col items-center justify-evenly">
             <Link
-              href="/about"
+              href="/user"
               className="border border-solid border-black w-full"
             >
               <li className="navBtn py-4 text-darkText font-bold">
@@ -82,11 +82,11 @@ const NavBar = () => {
               </li>
             </Link>
             <Link
-              href="/portfolio"
+              href="/checkout"
               className="border border-solid border-black w-full"
             >
               <li className="navBtn py-4 text-darkText font-bold">
-                Login
+                Cart
               </li>
             </Link>
           </ul>

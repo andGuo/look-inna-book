@@ -51,13 +51,13 @@ export default function Profile({ session }: { session: Session }) {
         setLname(data.last_name);
         if (data.user_address) {
           const arr = data.user_address;
-          setAddr(arr[0]);
-          setAptSuite(arr[1]);
-          setCountry(arr[2]);
-          setCity(arr[3]);
-          setState(arr[4]);
-          setZipCode(arr[5]);
-          setPhoneNum(arr[6]);
+          setAddr(arr[0].address);
+          setAptSuite(arr[0].apartment_suite);
+          setCountry(arr[0].country);
+          setCity(arr[0].city);
+          setState(arr[0].state);
+          setZipCode(arr[0].zip_code);
+          setPhoneNum(arr[0].phone_number);
         }
       }
     } catch (error) {
@@ -120,7 +120,6 @@ export default function Profile({ session }: { session: Session }) {
       if (!user) throw new Error("No user");
       if (
         !address ||
-        !apartment_suite ||
         !country ||
         !city ||
         !state ||
@@ -183,8 +182,8 @@ export default function Profile({ session }: { session: Session }) {
           className="button primary block"
           onClick={() =>
             updateProfile({
-              fname,
-              lname,
+              first_name: fname,
+              last_name: lname,
             })
           }
           disabled={loading}
@@ -220,7 +219,7 @@ export default function Profile({ session }: { session: Session }) {
         />
       </div>
       <div>
-        <label htmlFor="city">Last Name</label>
+        <label htmlFor="city">City</label>
         <input
           id="city"
           type="text"
@@ -260,13 +259,13 @@ export default function Profile({ session }: { session: Session }) {
           className="button primary block"
           onClick={() =>
             updateAddr({
-              addr,
-              aptSuite,
+              address: addr,
+              apartment_suite: aptSuite,
               country,
               city,
               state,
-              zipCode,
-              phoneNum,
+              zip_code: zipCode,
+              phone_number: phoneNum,
             })
           }
           disabled={loading}
