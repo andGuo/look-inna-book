@@ -78,6 +78,20 @@ export interface Database {
           zip_code?: string
         }
       }
+      book_genres: {
+        Row: {
+          isbn: string
+          genre_id: string
+        }
+        Insert: {
+          isbn: string
+          genre_id: string
+        }
+        Update: {
+          isbn?: string
+          genre_id?: string
+        }
+      }
       books: {
         Row: {
           isbn: string
@@ -143,15 +157,12 @@ export interface Database {
       }
       genres: {
         Row: {
-          isbn: string
           name: string
         }
         Insert: {
-          isbn: string
           name: string
         }
         Update: {
-          isbn?: string
           name?: string
         }
       }
