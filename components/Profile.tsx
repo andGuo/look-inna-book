@@ -118,14 +118,7 @@ export default function Profile({ session }: { session: Session }) {
     try {
       setLoading(true);
       if (!user) throw new Error("No user");
-      if (
-        !address ||
-        !country ||
-        !city ||
-        !state ||
-        !zip_code ||
-        !phone_number
-      )
+      if (!address || !country || !city || !state || !zip_code || !phone_number)
         throw new Error("Address Info Incomplete");
 
       const userAddrUpdate = {
@@ -254,26 +247,28 @@ export default function Profile({ session }: { session: Session }) {
           onChange={(e) => setPhoneNum(e.target.value)}
         />
       </div>
-      <div>
-        <button
-          className="button primary block"
-          onClick={() =>
-            updateAddr({
-              address: addr,
-              apartment_suite: aptSuite,
-              country,
-              city,
-              state,
-              zip_code: zipCode,
-              phone_number: phoneNum,
-            })
-          }
-          disabled={loading}
-        >
-          {loading ? "Loading ..." : "Update Address"}
+      <label className="block mb-6">
+        <span className="text-draculaYellow">City</span>
+        <input name="city" type="text" className="inputField" placeholder="" />
+      </label>
+      <div className="mb-6">
+        <button type="submit"
+        className="saveButton"
+        onClick={() =>
+          updateAddr({
+            address: addr,
+            apartment_suite: aptSuite,
+            country,
+            city,
+            state,
+            zip_code: zipCode,
+            phone_number: phoneNum,
+          })
+        }
+        disabled={loading}>
+          {loading ? "Loading ..." : "Save Address"}
         </button>
       </div>
-
       <div>
         <button
           className="button block"

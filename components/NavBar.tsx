@@ -1,8 +1,11 @@
 import * as React from "react";
 import Link from "next/link";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const NavBar = () => {
   const [openNavMenu, setNavMenuOpen] = React.useState(false);
+  const session = useSession();
+  const supabase = useSupabaseClient();
 
   return (
     <nav className="flex flex-wrap items-center justify-between content-end pt-5">
@@ -13,6 +16,18 @@ const NavBar = () => {
       </div>
       <div className="flex items-center pr-1.5">
         <ul className="hidden sm:flex p-3 text-xl items-center justify-evenly">
+          <li className="navBtn">
+            {!session ? (
+              <Link href="/user">Log In</Link>
+            ) : (
+              <button
+                className="button block"
+                onClick={() => supabase.auth.signOut()}
+              >
+                Sign Out
+              </button>
+            )}
+          </li>
           <li className="navBtn">
             <Link href="/user">Profile</Link>
           </li>
@@ -77,17 +92,13 @@ const NavBar = () => {
               href="/user"
               className="border border-solid border-black w-full"
             >
-              <li className="navBtn py-4 text-darkText font-bold">
-                Profile
-              </li>
+              <li className="navBtn py-4 text-darkText font-bold">Profile</li>
             </Link>
             <Link
               href="/checkout"
               className="border border-solid border-black w-full"
             >
-              <li className="navBtn py-4 text-darkText font-bold">
-                Cart
-              </li>
+              <li className="navBtn py-4 text-darkText font-bold">Cart</li>
             </Link>
           </ul>
         </div>
