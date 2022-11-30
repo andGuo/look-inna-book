@@ -5,7 +5,6 @@ import {
   Session,
 } from "@supabase/auth-helpers-react";
 import { Database } from "../utils/database.types";
-import { count } from "console";
 type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
 type Address = Database["public"]["Tables"]["user_address"]["Row"];
 

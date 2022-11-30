@@ -1,20 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   useUser,
   useSupabaseClient,
   Session,
 } from "@supabase/auth-helpers-react";
 import { Database } from "../../../utils/database.types";
-import { count } from "console";
 import Layout from "../../../components/Layout";
-type genre = Database["public"]["Tables"]["genres"]["Row"];
+type Genre = Database["public"]["Tables"]["genres"]["Row"];
 
-export default function AddGenre({ session }: { session: Session }) {
+export default function AddGenre() {
   const supabase = useSupabaseClient<Database>();
   const user = useUser();
-  const [name, setName] = useState("");
+  const [name, setName] = useState<Genre["name"]>("");
 
-  async function insertGenre({ name }: { name: genre["name"] }) {
+  async function insertGenre({ name }: { name: Genre["name"] }) {
     try {
       if (!user) throw new Error("No user");
       if (!name) throw new Error("No genre name");
@@ -34,7 +33,7 @@ export default function AddGenre({ session }: { session: Session }) {
   }
 
   return (
-    <Layout title="Login | Look-Inna-Book">
+    <Layout title="Add Genre | Look-Inna-Book">
       <div className="flex flex-wrap flex-col items-center justify-around sm:my-14 sm:flex-row sm:items-start sm:justify-center">
         <div className="lg:w-2/5 sm:w-1/2">
           <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
@@ -43,7 +42,7 @@ export default function AddGenre({ session }: { session: Session }) {
                 Add Genre
               </h1>
               <div>
-                <label htmlFor="genre name" className="block mb-6">
+                <label htmlFor="genre" className="block mb-6">
                   <span className="text-darkText">Genre Name</span>
                   <input
                     id="genre"
