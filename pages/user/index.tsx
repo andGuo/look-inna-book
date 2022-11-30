@@ -29,7 +29,7 @@ const Home = () => {
               </div>
             ) : (
               <div>
-                <h1 className="text-draculaGreen text-3xl pb-4 text-center">
+                <h1 className="text-draculaPink text-3xl pb-4 text-center">
                   User Info
                 </h1>
                 <Profile session={session} />
