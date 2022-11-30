@@ -147,32 +147,50 @@ export default function Profile({ session }: { session: Session }) {
   }
 
   return (
-    <div className="form-widget">
+    <div className="form-widget"> 
       <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
+        <label htmlFor="email" className="block mb-6">
+          <span className="text-darkText">Email</span>
+          <input
+            id="email"
+            type="text"
+            value={session.user.email}
+            disabled
+            className="inputField"
+            placeholder=""
+          />
+        </label>
       </div>
       <div>
-        <label htmlFor="fname">First Name</label>
-        <input
-          id="fname"
-          type="text"
-          value={fname || ""}
-          onChange={(e) => setFname(e.target.value)}
-        />
+        <label htmlFor="fname" className="block mb-6">
+          <span className="text-darkText">First Name</span>
+          <input
+            id="fname"
+            type="text"
+            value={fname || ""}
+            onChange={(e) => setFname(e.target.value)}
+            className="inputField"
+            placeholder=""
+          />
+        </label>
       </div>
       <div>
-        <label htmlFor="lname">Last Name</label>
-        <input
-          id="lname"
-          type="text"
-          value={lname || ""}
-          onChange={(e) => setLname(e.target.value)}
-        />
+        <label htmlFor="lname" className="block mb-6">
+          <span className="text-darkText">Last Name</span>
+          <input
+            id="lname"
+            type="text"
+            value={lname || ""}
+            onChange={(e) => setLname(e.target.value)}
+            className="inputField"
+            placeholder=""
+          />
+        </label>
       </div>
-      <div>
+      <div className="mb-6 flex justify-end">
         <button
-          className="button primary block"
+          type="submit"
+          className="saveButton"
           onClick={() =>
             updateProfile({
               first_name: fname,
@@ -185,96 +203,114 @@ export default function Profile({ session }: { session: Session }) {
         </button>
       </div>
       <div>
-        <label htmlFor="address">Address</label>
-        <input
-          id="address"
-          type="text"
-          value={addr || ""}
-          onChange={(e) => setAddr(e.target.value)}
-        />
+        <label htmlFor="address" className="block mb-6">
+          <span className="text-darkText">Address</span>
+          <input
+            id="address"
+            type="text"
+            value={addr || ""}
+            onChange={(e) => setAddr(e.target.value)}
+            className="inputField"
+            placeholder=""
+          />
+        </label>
       </div>
       <div>
-        <label htmlFor="apartment_suite">Apartment/Suite</label>
-        <input
-          id="apartment_suite"
-          type="text"
-          value={aptSuite || ""}
-          onChange={(e) => setAptSuite(e.target.value)}
-        />
+        <label htmlFor="apartment_suite" className="block mb-6">
+          <span className="text-darkText">Apartment/Suite/Company</span>
+          <input
+            id="apartment_suite"
+            type="text"
+            value={aptSuite || ""}
+            onChange={(e) => setAptSuite(e.target.value)}
+            className="inputField"
+            placeholder=""
+          />
+        </label>
       </div>
       <div>
-        <label htmlFor="country">Country</label>
-        <input
-          id="country"
-          type="text"
-          value={country || ""}
-          onChange={(e) => setCountry(e.target.value)}
-        />
+        <label htmlFor="country" className="block mb-6">
+          <span className="text-darkText">Country</span>
+          <input
+            id="country"
+            type="text"
+            value={country || ""}
+            onChange={(e) => setCountry(e.target.value)}
+            className="inputField"
+            placeholder=""
+          />
+        </label>
       </div>
       <div>
-        <label htmlFor="city">City</label>
-        <input
-          id="city"
-          type="text"
-          value={city || ""}
-          onChange={(e) => setCity(e.target.value)}
-        />
+        <label htmlFor="city" className="block mb-6">
+          <span className="text-darkText">City</span>
+          <input
+            id="city"
+            type="text"
+            value={city || ""}
+            onChange={(e) => setCity(e.target.value)}
+            className="inputField"
+            placeholder=""
+          />
+        </label>
       </div>
       <div>
-        <label htmlFor="state">State/Province</label>
-        <input
-          id="state"
-          type="text"
-          value={state || ""}
-          onChange={(e) => setState(e.target.value)}
-        />
+        <label htmlFor="state" className="block mb-6">
+          <span className="text-darkText">State/Province</span>
+          <input
+            id="state"
+            type="text"
+            value={state || ""}
+            onChange={(e) => setState(e.target.value)}
+            className="inputField"
+            placeholder=""
+          />
+        </label>
       </div>
       <div>
-        <label htmlFor="zip_code">Postal Code</label>
-        <input
-          id="zip_code"
-          type="text"
-          value={zipCode || ""}
-          onChange={(e) => setZipCode(e.target.value)}
-        />
+        <label htmlFor="zip_code" className="block mb-6">
+          <span className="text-darkText">Postal Code</span>
+          <input
+            id="zip_code"
+            type="text"
+            value={zipCode || ""}
+            onChange={(e) => setZipCode(e.target.value)}
+            className="inputField"
+            placeholder=""
+          />
+        </label>
       </div>
       <div>
-        <label htmlFor="phone_number">Phone Number</label>
-        <input
-          id="phone_number"
-          type="text"
-          value={phoneNum || ""}
-          onChange={(e) => setPhoneNum(e.target.value)}
-        />
+        <label htmlFor="phone_number" className="block mb-6">
+          <span className="text-darkText">Phone Number</span>
+          <input
+            id="phone_number"
+            type="text"
+            value={phoneNum || ""}
+            onChange={(e) => setPhoneNum(e.target.value)}
+            className="inputField"
+            placeholder=""
+          />
+        </label>
       </div>
-      <label className="block mb-6">
-        <span className="text-draculaYellow">City</span>
-        <input name="city" type="text" className="inputField" placeholder="" />
-      </label>
-      <div className="mb-6">
-        <button type="submit"
-        className="saveButton"
-        onClick={() =>
-          updateAddr({
-            address: addr,
-            apartment_suite: aptSuite,
-            country,
-            city,
-            state,
-            zip_code: zipCode,
-            phone_number: phoneNum,
-          })
-        }
-        disabled={loading}>
-          {loading ? "Loading ..." : "Save Address"}
-        </button>
-      </div>
-      <div>
+      <div className="mb-6 flex justify-end">
         <button
-          className="button block"
-          onClick={() => supabase.auth.signOut()}
+          type="submit"
+          className="saveButton"
+          onClick={() =>
+            updateAddr({
+              address: addr,
+              apartment_suite: aptSuite,
+              country,
+              city,
+              state,
+              zip_code: zipCode,
+              phone_number: phoneNum,
+            })
+          }
+          disabled={loading}
         >
-          Sign Out
+          {loading ? "Loading ..." : "Save Address"}
         </button>
       </div>
     </div>

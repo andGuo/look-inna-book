@@ -10,6 +10,8 @@
     @apply block
         w-full
         mt-1
+        py-1
+        px-2
         border-gray-300
         rounded-md
         shadow-sm
@@ -20,12 +22,12 @@
   .saveButton {
     @apply h-10
     px-5
-    text-indigo-100
-    bg-draculaRed
+    text-darkSecondary
+    bg-draculaPurple
     rounded-lg
     transition-colors
     duration-150
     focus:shadow
-    hover:bg-draculaPink;
+    hover:bg-draculaGreen;
   }
 }
