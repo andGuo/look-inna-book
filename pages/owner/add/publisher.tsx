@@ -267,7 +267,7 @@ export default function AddPublisher() {
                     />
                   </label>
                 </div>
-                <h2 className="text-draculaPink text-3xl pb-4 text-center">
+                <h2 className="text-draculaPink text-3xl pb-4 pt-2 text-center">
                   Publisher Bank Account Info
                 </h2>
                 <div>

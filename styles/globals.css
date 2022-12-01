@@ -34,6 +34,6 @@
 
 @layer base {
   .addInput {
-    @apply text-draculaYellow hover:text-draculaCyan underline text-sm pr-2
+    @apply text-draculaYellow hover:text-draculaCyan underline text-sm pr-2 select-none
   }
 }
