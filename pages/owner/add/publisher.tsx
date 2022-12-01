@@ -75,7 +75,6 @@ export default function AddPublisher() {
         name,
         email,
         address,
-        apartment_suite,
         country,
         city,
         state,
@@ -83,7 +82,8 @@ export default function AddPublisher() {
         transit_num,
         institution_num,
         account_num,
-        phoneNumbers,
+        phonenumbers: phoneNumbers,
+        apartment_suite,
       };
 
       let { data, error } = await supabase.rpc(
@@ -91,6 +91,7 @@ export default function AddPublisher() {
         newPublisher
       );
 
+      if (error) console.error(error);
       if (error) throw error;
       alert("Publisher added!");
     } catch (error) {
@@ -144,7 +145,11 @@ export default function AddPublisher() {
                         key={index}
                         type="text"
                         value={phoneNums[index] || ""}
-                        onChange={(e) => e.target.value}
+                        onChange={(e) => {
+                          const t = [...phoneNums];
+                          t[index] = e.target.value;
+                          setPhoneNums(t);
+                        }}
                         className="inputField"
                         placeholder=""
                       />
@@ -313,13 +318,18 @@ export default function AddPublisher() {
                     className="saveButton"
                     onClick={() =>
                       createPublisher({
+                        name,
+                        email,
                         address: addr,
                         apartment_suite: aptSuite,
                         country,
                         city,
                         state,
                         zip_code: zipCode,
-                        phone_number: phoneNum,
+                        transit_num: transit,
+                        institution_num: institution,
+                        account_num: account,
+                        phoneNumbers: phoneNums,
                       })
                     }
                   >
