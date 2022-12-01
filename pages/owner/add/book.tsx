@@ -6,6 +6,7 @@ import {
 } from "@supabase/auth-helpers-react";
 import { Database } from "../../../utils/database.types";
 import Layout from "../../../components/Layout";
+import BookImage from "../../../components/BookImage"
 type Publisher = Database["public"]["Tables"]["publishers"]["Row"];
 type Author = Database["public"]["Tables"]["authors"]["Row"];
 type Genre = Database["public"]["Tables"]["genres"]["Row"];
@@ -14,12 +15,13 @@ type Book = Database["public"]["Tables"]["books"]["Row"];
 export default function AddPublisher() {
   const supabase = useSupabaseClient<Database>();
   const user = useUser();
+  const [isbn, setIsbn] = useState<Book["isbn"]>("");
   const [title, setTitle] = useState<Book["title"]>("");
   const [msrp, setMsrp] = useState<Book["msrp"]>(0.0);
   const [numPages, setNumPages] = useState<Book["num_pages"]>(0);
   const [pubPercentage, setPubPercentage] =
     useState<Book["pub_percentage"]>(0.0);
-  const [imgUrl, setImgUrl] = useState<Book["img_url"]>(null);
+  const [imgUrl, setImgUrl] = useState<Book["img_url"]>("");
   const [publisherId, setPublisherId] = useState<Book["publisher_id"]>("");
 
   const inputNumMax = (e: any) => {
@@ -77,6 +79,9 @@ export default function AddPublisher() {
               <h1 className="text-draculaPink text-3xl pb-4 text-center">
                 Add Book
               </h1>
+              <BookImage isbn={isbn} url={""} size={250} onUpload={url => {
+                setImgUrl(url);
+              }} />
               <div className="form-widget">
                 <div>
                   <label htmlFor="title" className="block mb-6">
