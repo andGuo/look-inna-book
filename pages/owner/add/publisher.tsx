@@ -132,11 +132,12 @@ export default function AddPublisher() {
                       />
                     ))}
                     {(phoneNums.length > 1) ? (
-                      <div>
+                      <div className="flex justify-start">
                         <button
                           onClick={(e) =>
                             setPhoneNums((phoneNums) => [...phoneNums, ""])
                           }
+                          className="addInput"
                         >
                           Add Phone Number
                         </button>
@@ -144,6 +145,7 @@ export default function AddPublisher() {
                           onClick={(e) =>
                             setPhoneNums((phoneNums) => phoneNums.slice(0, -1))
                           }
+                          className="addInput"
                         >
                           Remove Phone Number
                         </button>
@@ -154,6 +156,7 @@ export default function AddPublisher() {
                           onClick={(e) =>
                             setPhoneNums((phoneNums) => [...phoneNums, ""])
                           }
+                          className="addInput"
                         >
                           Add Phone Number
                         </button>

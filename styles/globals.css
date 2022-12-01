@@ -31,3 +31,9 @@
     hover:bg-draculaGreen;
   }
 }
+
+@layer base {
+  .addInput {
+    @apply text-draculaYellow hover:text-draculaCyan underline text-sm pr-2
+  }
+}
