@@ -10,13 +10,14 @@ type Publishers = Database["public"]["Tables"]["publishers"]["Row"];
 type PaymentInfo = Database["public"]["Tables"]["payment_info"]["Row"];
 type PublisherAddress =
   Database["public"]["Tables"]["publisher_address"]["Row"];
+type PublisherPhone = Database["public"]["Tables"]["publisher_phones"]["Row"];
 
 export default function AddPublisher() {
   const supabase = useSupabaseClient<Database>();
   const user = useUser();
   const [name, setName] = useState<Publishers["name"]>("");
   const [email, setEmail] = useState<Publishers["email"]>("");
-  const [phoneNums, setPhone] = useState("");
+  const [phoneNums, setPhoneNums] = useState([""]);
   const [addr, setAddr] = useState<PublisherAddress["address"]>("");
   const [aptSuite, setAptSuite] =
     useState<PublisherAddress["apartment_suite"]>("");
@@ -50,7 +51,7 @@ export default function AddPublisher() {
     city: PublisherAddress["city"];
     state: PublisherAddress["state"];
     zip_code: PublisherAddress["address"];
-    phone_number: PublisherAddress["phone_number"];
+    phone_number: PublisherPhone["number"];
   }) {
     try {
       if (!user) throw new Error("No user");
@@ -119,14 +120,45 @@ export default function AddPublisher() {
                 <div>
                   <label htmlFor="phone_nums" className="block mb-6">
                     <span className="text-darkText">Phone Numbers</span>
-                    <input
-                      id="phone_nums"
-                      type="text"
-                      value={phoneNums || ""}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="inputField"
-                      placeholder=""
-                    />
+                    {phoneNums.map((num, index) => (
+                      <input
+                        id="phone_nums"
+                        key={index}
+                        type="text"
+                        value={phoneNums[index] || ""}
+                        onChange={(e) => e.target.value}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    ))}
+                    {(phoneNums.length > 1) ? (
+                      <div>
+                        <button
+                          onClick={(e) =>
+                            setPhoneNums((phoneNums) => [...phoneNums, ""])
+                          }
+                        >
+                          Add Phone Number
+                        </button>
+                        <button
+                          onClick={(e) =>
+                            setPhoneNums((phoneNums) => phoneNums.slice(0, -1))
+                          }
+                        >
+                          Remove Phone Number
+                        </button>
+                      </div>
+                    ) : (
+                      <div>
+                        <button
+                          onClick={(e) =>
+                            setPhoneNums((phoneNums) => [...phoneNums, ""])
+                          }
+                        >
+                          Add Phone Number
+                        </button>
+                      </div>
+                    )}
                   </label>
                 </div>
                 <div>

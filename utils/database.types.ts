@@ -289,24 +289,35 @@ export interface Database {
           zip_code?: string
         }
       }
+      publisher_phones: {
+        Row: {
+          publisher_id: string
+          number: string
+        }
+        Insert: {
+          publisher_id: string
+          number: string
+        }
+        Update: {
+          publisher_id?: string
+          number?: string
+        }
+      }
       publishers: {
         Row: {
           publisher_id: string
           name: string
           email: string
-          phone_number: string
         }
         Insert: {
           publisher_id: string
           name: string
           email: string
-          phone_number: string
         }
         Update: {
           publisher_id?: string
           name?: string
           email?: string
-          phone_number?: string
         }
       }
       roles: {
