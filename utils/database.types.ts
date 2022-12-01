@@ -31,7 +31,7 @@ export interface Database {
           last_name: string
         }
         Insert: {
-          author_id: string
+          author_id?: string
           first_name: string
           middle_name?: string | null
           last_name: string
@@ -95,7 +95,7 @@ export interface Database {
       books: {
         Row: {
           isbn: string
-          name: string
+          title: string
           msrp: number
           num_pages: number
           pub_percentage: number
@@ -104,7 +104,7 @@ export interface Database {
         }
         Insert: {
           isbn: string
-          name: string
+          title: string
           msrp: number
           num_pages: number
           pub_percentage: number
@@ -113,7 +113,7 @@ export interface Database {
         }
         Update: {
           isbn?: string
-          name?: string
+          title?: string
           msrp?: number
           num_pages?: number
           pub_percentage?: number
@@ -206,29 +206,6 @@ export interface Database {
           total_quantity?: number
         }
       }
-      payment_info: {
-        Row: {
-          publisher_id: string
-          transit_num: number
-          institution_num: number
-          account_num: number
-          accounts_payable: number
-        }
-        Insert: {
-          publisher_id: string
-          transit_num: number
-          institution_num: number
-          account_num: number
-          accounts_payable: number
-        }
-        Update: {
-          publisher_id?: string
-          transit_num?: number
-          institution_num?: number
-          account_num?: number
-          accounts_payable?: number
-        }
-      }
       profile_roles: {
         Row: {
           profile_id: string
@@ -289,6 +266,29 @@ export interface Database {
           zip_code?: string
         }
       }
+      publisher_payment: {
+        Row: {
+          publisher_id: string
+          transit_num: number
+          institution_num: number
+          account_num: number
+          accounts_payable: number
+        }
+        Insert: {
+          publisher_id: string
+          transit_num: number
+          institution_num: number
+          account_num: number
+          accounts_payable: number
+        }
+        Update: {
+          publisher_id?: string
+          transit_num?: number
+          institution_num?: number
+          account_num?: number
+          accounts_payable?: number
+        }
+      }
       publisher_phones: {
         Row: {
           publisher_id: string
@@ -310,7 +310,7 @@ export interface Database {
           email: string
         }
         Insert: {
-          publisher_id: string
+          publisher_id?: string
           name: string
           email: string
         }
@@ -409,7 +409,33 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      create_author: {
+        Args: {
+          first_name: string
+          middle_name: string
+          last_name: string
+          author_id: string
+        }
+        Returns: undefined
+      }
+      create_publisher: {
+        Args: {
+          name: string
+          email: string
+          address: string
+          country: string
+          city: string
+          state: string
+          zip_code: string
+          transit_num: number
+          institution_num: number
+          account_num: number
+          phonenumbers: unknown
+          apartment_suite: string
+          publisher_id: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

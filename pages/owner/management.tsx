@@ -15,7 +15,7 @@ const Home = () => {
             <h1 className="text-draculaCyan text-3xl pb-4 text-center">
               Owner Management Page
             </h1>
-            <ul className="grid-cols-3">
+            <ul className="grid-cols-3 list-disc">
               <li className="redirectButton">
                 <Link href="add/book">Add New Book</Link>
               </li>
