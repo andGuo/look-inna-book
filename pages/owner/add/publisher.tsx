@@ -37,46 +37,64 @@ export default function AddPublisher() {
   };
 
   async function createPublisher({
+    name,
+    email,
     address,
     apartment_suite,
     country,
     city,
     state,
     zip_code,
-    phone_number,
+    transit_num,
+    institution_num,
+    account_num,
+    phoneNumbers,
   }: {
+    name: Publishers["name"];
+    email: Publishers["email"];
     address: PublisherAddress["address"];
     apartment_suite: PublisherAddress["apartment_suite"];
     country: PublisherAddress["country"];
     city: PublisherAddress["city"];
     state: PublisherAddress["state"];
     zip_code: PublisherAddress["address"];
-    phone_number: PublisherPhone["number"];
+    transit_num: PaymentInfo["transit_num"];
+    institution_num: PaymentInfo["institution_num"];
+    account_num: PaymentInfo["account_num"];
+    phoneNumbers: PublisherPhone["number"][];
   }) {
     try {
       if (!user) throw new Error("No user");
-      if (!address || !country || !city || !state || !zip_code || !phone_number)
+      if (!address || !country || !city || !state || !zip_code)
         throw new Error("Address Info Incomplete");
+      if (!name || !email) throw new Error("Publisher Info Incomplete");
+      if (!transit_num || !institution_num || !account_num)
+        throw new Error("Bank Account Info Incomplete");
 
-      const userAddrUpdate = {
-        profile_id: user.id,
+      const newPublisher = {
+        name,
+        email,
         address,
         apartment_suite,
         country,
         city,
         state,
         zip_code,
-        phone_number,
+        transit_num,
+        institution_num,
+        account_num,
+        phoneNumbers,
       };
 
-      let { error } = await supabase
-        .from("user_address")
-        .upsert(userAddrUpdate);
+      let { data, error } = await supabase.rpc(
+        "create_publisher",
+        newPublisher
+      );
 
       if (error) throw error;
-      alert("Address updated!");
+      alert("Publisher added!");
     } catch (error) {
-      alert("Error updating address data!");
+      alert("Error creating publisher!");
       console.log(error);
     }
   }
@@ -131,7 +149,7 @@ export default function AddPublisher() {
                         placeholder=""
                       />
                     ))}
-                    {(phoneNums.length > 1) ? (
+                    {phoneNums.length > 1 ? (
                       <div className="flex justify-start">
                         <button
                           onClick={(e) =>
