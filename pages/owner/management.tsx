@@ -15,24 +15,24 @@ const Home = () => {
             <h1 className="text-draculaCyan text-3xl pb-4 text-center">
               Owner Management Page
             </h1>
-            <ul>
-              <li className="navBtn">
-                <Link href="/add/book">Add New Book</Link>
+            <ul className="grid-cols-3">
+              <li className="redirectButton">
+                <Link href="add/book">Add New Book</Link>
               </li>
-              <li className="navBtn">
-                <Link href="/remove/book">Remove Books</Link>
+              <li className="redirectButton">
+                <Link href="remove/book">Remove Books</Link>
               </li>
-              <li className="navBtn">
-                <Link href="/add/author">Add Author</Link>
+              <li className="redirectButton">
+                <Link href="add/author">Add Author</Link>
               </li>
-              <li className="navBtn">
-                <Link href="/add/publisher">Add Publisher</Link>
+              <li className="redirectButton">
+                <Link href="add/publisher">Add Publisher</Link>
               </li>
-              <li className="navBtn">
-                <Link href="/add/genre">Add Genre</Link>
+              <li className="redirectButton">
+                <Link href="add/genre">Add Genre</Link>
               </li>
-              <li className="navBtn">
-                <Link href="/report">Generate Report</Link>
+              <li className="redirectButton">
+                <Link href="report">Generate Report</Link>
               </li>
             </ul>
           </div>

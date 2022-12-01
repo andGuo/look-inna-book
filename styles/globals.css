@@ -36,4 +36,7 @@
   .addInput {
     @apply text-draculaYellow hover:text-draculaCyan underline text-sm pr-2 select-none
   }
+  .redirectButton {
+    @apply mx-3 px-1.5 text-darkText hover:text-draculaCyan hover:underline my-2 text-lg;
+  }
 }
