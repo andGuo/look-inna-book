@@ -6,11 +6,12 @@ import {
 } from "@supabase/auth-helpers-react";
 import { Database } from "../../../utils/database.types";
 import Layout from "../../../components/Layout";
-import BookImage from "../../../components/BookImage"
+import BookImage from "../../../components/BookImage";
 type Publisher = Database["public"]["Tables"]["publishers"]["Row"];
 type Author = Database["public"]["Tables"]["authors"]["Row"];
 type Genre = Database["public"]["Tables"]["genres"]["Row"];
 type Book = Database["public"]["Tables"]["books"]["Row"];
+import { v4 as uuidv4 } from 'uuid';
 
 export default function AddPublisher() {
   const supabase = useSupabaseClient<Database>();
@@ -23,6 +24,7 @@ export default function AddPublisher() {
     useState<Book["pub_percentage"]>(0.0);
   const [imgUrl, setImgUrl] = useState<Book["img_url"]>("");
   const [publisherId, setPublisherId] = useState<Book["publisher_id"]>("");
+  const [uuid, setUuid] = useState(uuidv4());
 
   const inputNumMax = (e: any) => {
     if (e.target.value.length > e.target.maxLength) {
@@ -79,10 +81,30 @@ export default function AddPublisher() {
               <h1 className="text-draculaPink text-3xl pb-4 text-center">
                 Add Book
               </h1>
-              <BookImage isbn={isbn} url={""} size={250} onUpload={url => {
-                setImgUrl(url);
-              }} />
+              <div className="m-1 p-1">
+                <BookImage
+                  uuid={uuid}
+                  url={""}
+                  size={250}
+                  onUpload={(url) => {
+                    setImgUrl(url);
+                  }}
+                />
+              </div>
               <div className="form-widget">
+                <div>
+                  <label htmlFor="isbn" className="block mb-6">
+                    <span className="text-darkText">Book ISBN</span>
+                    <input
+                      id="isbn"
+                      type="text"
+                      value={isbn || ""}
+                      onChange={(e) => setIsbn(e.target.value)}
+                      className="inputField"
+                      placeholder=""
+                    />
+                  </label>
+                </div>
                 <div>
                   <label htmlFor="title" className="block mb-6">
                     <span className="text-darkText">Book Title</span>
@@ -102,6 +124,7 @@ export default function AddPublisher() {
                     <input
                       id="msrp"
                       type="number"
+                      step="0.01"
                       value={msrp || ""}
                       onChange={(e) => setMsrp(Number(e.target.value))}
                       className="inputField"
