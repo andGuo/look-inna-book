@@ -27,7 +27,9 @@ export default function AddPublisher() {
   const [pubPercentage, setPubPercentage] =
     useState<Book["pub_percentage"]>(0.0);
   const [imgUrl, setImgUrl] = useState<Book["img_url"]>("");
-  const [publisherId, setPublisherId] = useState<Book["publisher_id"]>("");
+  const [selectPublisher, setSelectPublisher] = useState<Book["publisher_id"]>("");
+  const [selectGenres, setSelectGenres] = useState<Genre["name"][]>([]);
+  const [selectAuthors, setSelectAuthors] = useState<Author["author_id"][]>([]);
   const [publishers, setPublishers] = useState<Publisher[]>([]);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [authors, setAuthors] = useState<Author[]>([]);
@@ -260,6 +262,7 @@ export default function AddPublisher() {
                           value: pub.publisher_id,
                           label: `${pub.name} - (${pub.email})`,
                         }))}
+                        onChange={(e) => {setSelectPublisher(e.value)}}
                       />
                     </label>
                   </div>
@@ -273,6 +276,7 @@ export default function AddPublisher() {
                           value: author.author_id,
                           label: `${author.first_name} ${author.middle_name} ${author.last_name}`,
                         }))}
+                        onChange={(e) => {setSelectAuthors(e.flatMap(a => a.value))}}
                       />
                     </label>
                   </div>
@@ -286,6 +290,7 @@ export default function AddPublisher() {
                           value: gen.name,
                           label: `${gen.name}`,
                         }))}
+                        onChange={(e) => {setSelectGenres(e.flatMap(g => g.value))}}
                       />
                     </label>
                   </div>
