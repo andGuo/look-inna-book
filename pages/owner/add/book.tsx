@@ -282,7 +282,7 @@ export default function AddPublisher() {
                           label: `${pub.name} - (${pub.email})`,
                         }))}
                         onChange={(e) => {
-                          setSelectPublisher(e.value);
+                          setSelectPublisher(e?.value || "");
                         }}
                       />
                     </label>

@@ -418,6 +418,20 @@ export interface Database {
         }
         Returns: undefined
       }
+      create_book: {
+        Args: {
+          isbn: string
+          title: string
+          msrp: number
+          num_pages: number
+          pub_percentage: number
+          publisher_id: string
+          authors: string[]
+          genres: string[]
+          img_url: string
+        }
+        Returns: undefined
+      }
       create_publisher: {
         Args: {
           name: string
@@ -430,11 +444,15 @@ export interface Database {
           transit_num: number
           institution_num: number
           account_num: number
-          phonenumbers: unknown
+          phonenumbers: string[]
           apartment_suite: string
           publisher_id: string
         }
         Returns: undefined
+      }
+      is_owner: {
+        Args: { pid: string }
+        Returns: boolean
       }
     }
     Enums: {
