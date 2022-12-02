@@ -228,24 +228,26 @@ export default function AddPublisher() {
                           setNumPages(Number(value));
                         }}
                         className="inputField"
-                        placeholder=""
+                        placeholder="ex. 100"
                       />
                     </label>
                   </div>
                   <div>
                     <label htmlFor="pubPercentage" className="block mb-6">
                       <span className="text-darkText">
-                        Publisher Commission Percentage:
-                      </span>
-                      <input
+                        Publisher Commission Percentage (As a fractional):
+                      </span> 
+                      <NumericFormat
+                        allowNegative={false}
                         id="pubPercentage"
-                        type="number"
                         value={pubPercentage || ""}
-                        onChange={(e) =>
-                          setPubPercentage(Number(e.target.value))
-                        }
+                        onValueChange={(value) => {
+                          setPubPercentage(Number(value));
+                        }}
                         className="inputField"
-                        placeholder=""
+                        placeholder="ex. 0.125 is 12.5%"
+                        decimalScale={0}
+                        prefix="0."
                       />
                     </label>
                   </div>
