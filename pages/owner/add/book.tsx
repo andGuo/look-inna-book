@@ -23,6 +23,8 @@ export default function AddPublisher() {
   const [isbn, setIsbn] = useState<Book["isbn"]>("");
   const [title, setTitle] = useState<Book["title"]>("");
   const [msrp, setMsrp] = useState<Book["msrp"]>(0.0);
+  const [instockQuantity, setInstockQuantity] =
+    useState<Book["instock_quantity"]>(0);
   const [numPages, setNumPages] = useState<Book["num_pages"]>(0);
   const [pubPercentage, setPubPercentage] =
     useState<Book["pub_percentage"]>(0.0);
@@ -123,6 +125,7 @@ export default function AddPublisher() {
     isbn,
     title,
     msrp,
+    instock_quantity,
     num_pages,
     pub_percentage,
     publisher_id,
@@ -133,6 +136,7 @@ export default function AddPublisher() {
     isbn: Book["isbn"];
     title: Book["title"];
     msrp: Book["msrp"];
+    instock_quantity: Book["instock_quantity"];
     num_pages: Book["num_pages"];
     pub_percentage: Book["pub_percentage"];
     publisher_id: Book["publisher_id"];
@@ -150,14 +154,24 @@ export default function AddPublisher() {
         !pub_percentage ||
         !publisher_id ||
         !authors
-      ){
-        console.log(isbn, title, msrp, num_pages, pub_percentage, publisher_id, authors);
-        throw new Error("Book Info Incomplete");}
+      ) {
+        console.log(
+          isbn,
+          title,
+          msrp,
+          num_pages,
+          pub_percentage,
+          publisher_id,
+          authors
+        );
+        throw new Error("Book Info Incomplete");
+      }
 
       const newBook = {
         isbn,
         title,
         msrp,
+        instock_quantity,
         num_pages,
         pub_percentage,
         publisher_id,
@@ -226,14 +240,32 @@ export default function AddPublisher() {
                 <div>
                   <label htmlFor="msrp" className="block mb-6">
                     <span className="text-darkText">Book Retail Price:</span>
-                    <CurrencyInput
+                    <NumericFormat
                       id="msrp"
                       name="input-msrp"
                       placeholder="Enter price ($)"
-                      decimalsLimit={2}
-                      prefix="$"
-                      onValueChange={(value, name) => setMsrp(Number(value))}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                      onValueChange={(v) => setMsrp(Number(v.value))}
+                      decimalScale={2}
+                      value={msrp || ""}
                       className="inputField"
+                    />
+                  </label>
+                </div>
+                <div>
+                  <label htmlFor="instock" className="block mb-6">
+                    <span className="text-darkText">Inventory Quantity:</span>
+                    <NumericFormat
+                      allowNegative={false}
+                      id="instock"
+                      value={instockQuantity || ""}
+                      onValueChange={(v) => {
+                        setInstockQuantity(Number(v.value));
+                      }}
+                      className="inputField"
+                      placeholder="ex. 25"
+                      decimalScale={0}
                     />
                   </label>
                 </div>
@@ -250,6 +282,7 @@ export default function AddPublisher() {
                         }}
                         className="inputField"
                         placeholder="ex. 100"
+                        decimalScale={0}
                       />
                     </label>
                   </div>
@@ -328,6 +361,7 @@ export default function AddPublisher() {
                           isbn,
                           title,
                           msrp,
+                          instock_quantity: instockQuantity,
                           num_pages: numPages,
                           pub_percentage: pubPercentage,
                           publisher_id: selectPublisher,

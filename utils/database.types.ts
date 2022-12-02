@@ -101,6 +101,7 @@ export interface Database {
           pub_percentage: number
           img_url: string | null
           publisher_id: string
+          instock_quantity: number | null
         }
         Insert: {
           isbn: string
@@ -110,6 +111,7 @@ export interface Database {
           pub_percentage: number
           img_url?: string | null
           publisher_id: string
+          instock_quantity?: number | null
         }
         Update: {
           isbn?: string
@@ -119,6 +121,7 @@ export interface Database {
           pub_percentage?: number
           img_url?: string | null
           publisher_id?: string
+          instock_quantity?: number | null
         }
       }
       cart_books: {
@@ -428,6 +431,7 @@ export interface Database {
           publisher_id: string
           authors: string[]
           genres: string[]
+          instock_quantity: number
           img_url: string
         }
         Returns: undefined
