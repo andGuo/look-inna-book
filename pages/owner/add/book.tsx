@@ -8,6 +8,7 @@ import { Database } from "../../../utils/database.types";
 import Layout from "../../../components/Layout";
 import BookImage from "../../../components/BookImage";
 import Select from "react-select";
+import { NumericFormat } from "react-number-format";
 import CurrencyInput from "react-currency-input-field";
 type Publisher = Database["public"]["Tables"]["publishers"]["Row"];
 type Author = Database["public"]["Tables"]["authors"]["Row"];
@@ -207,7 +208,7 @@ export default function AddPublisher() {
                     <CurrencyInput
                       id="msrp"
                       name="input-msrp"
-                      placeholder="Enter price"
+                      placeholder="Enter price ($)"
                       decimalsLimit={2}
                       prefix="$"
                       onValueChange={(value, name) => setMsrp(Number(value))}
@@ -219,11 +220,13 @@ export default function AddPublisher() {
                   <div>
                     <label htmlFor="numPages" className="block mb-6">
                       <span className="text-darkText">Number of Pages:</span>
-                      <input
+                      <NumericFormat
+                        allowNegative={false}
                         id="numPages"
-                        type="number"
                         value={numPages || ""}
-                        onChange={(e) => setNumPages(Number(e.target.value))}
+                        onValueChange={(value) => {
+                          setNumPages(Number(value));
+                        }}
                         className="inputField"
                         placeholder=""
                       />
