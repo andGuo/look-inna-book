@@ -150,8 +150,9 @@ export default function AddPublisher() {
         !pub_percentage ||
         !publisher_id ||
         !authors
-      )
-        throw new Error("Book Info Incomplete");
+      ){
+        console.log(isbn, title, msrp, num_pages, pub_percentage, publisher_id, authors);
+        throw new Error("Book Info Incomplete");}
 
       const newBook = {
         isbn,
@@ -244,8 +245,8 @@ export default function AddPublisher() {
                         allowNegative={false}
                         id="numPages"
                         value={numPages || ""}
-                        onValueChange={(value) => {
-                          setNumPages(Number(value));
+                        onValueChange={(v) => {
+                          setNumPages(Number(v.value));
                         }}
                         className="inputField"
                         placeholder="ex. 100"
@@ -260,9 +261,8 @@ export default function AddPublisher() {
                       <NumericFormat
                         allowNegative={false}
                         id="pubPercentage"
-                        value={pubPercentage || ""}
-                        onValueChange={(value) => {
-                          setPubPercentage(Number(value));
+                        onValueChange={(v) => {
+                          setPubPercentage(Number(v.formattedValue));
                         }}
                         className="inputField"
                         placeholder="ex. 0.125 is 12.5%"
