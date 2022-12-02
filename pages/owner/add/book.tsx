@@ -177,7 +177,7 @@ export default function AddPublisher() {
               <div className="form-widget">
                 <div>
                   <label htmlFor="isbn" className="block mb-6">
-                    <span className="text-darkText">Book ISBN</span>
+                    <span className="text-darkText">Book ISBN:</span>
                     <input
                       id="isbn"
                       type="text"
@@ -190,7 +190,7 @@ export default function AddPublisher() {
                 </div>
                 <div>
                   <label htmlFor="title" className="block mb-6">
-                    <span className="text-darkText">Book Title</span>
+                    <span className="text-darkText">Book Title:</span>
                     <input
                       id="title"
                       type="text"
@@ -203,7 +203,7 @@ export default function AddPublisher() {
                 </div>
                 <div>
                   <label htmlFor="msrp" className="block mb-6">
-                    <span className="text-darkText">Book Retail Price</span>
+                    <span className="text-darkText">Book Retail Price:</span>
                     <CurrencyInput
                       id="msrp"
                       name="input-msrp"
@@ -218,7 +218,7 @@ export default function AddPublisher() {
                 <div>
                   <div>
                     <label htmlFor="numPages" className="block mb-6">
-                      <span className="text-darkText">Number of Pages</span>
+                      <span className="text-darkText">Number of Pages:</span>
                       <input
                         id="numPages"
                         type="number"
@@ -232,7 +232,7 @@ export default function AddPublisher() {
                   <div>
                     <label htmlFor="pubPercentage" className="block mb-6">
                       <span className="text-darkText">
-                        Publisher Commission Percentage
+                        Publisher Commission Percentage:
                       </span>
                       <input
                         id="pubPercentage"

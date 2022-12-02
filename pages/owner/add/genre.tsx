@@ -43,7 +43,7 @@ export default function AddGenre() {
               </h1>
               <div>
                 <label htmlFor="genre" className="block mb-6">
-                  <span className="text-darkText">Genre Name</span>
+                  <span className="text-darkText">Genre Name:</span>
                   <input
                     id="genre"
                     type="text"

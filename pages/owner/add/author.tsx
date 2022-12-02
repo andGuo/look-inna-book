@@ -59,7 +59,7 @@ export default function AddGenre() {
               </h1>
               <div>
                 <label htmlFor="fname" className="block mb-6">
-                  <span className="text-darkText">First Name</span>
+                  <span className="text-darkText">First Name:</span>
                   <input
                     id="fname"
                     type="text"
@@ -72,7 +72,7 @@ export default function AddGenre() {
               </div>
               <div>
                 <label htmlFor="mname" className="block mb-6">
-                  <span className="text-darkText">Middle Name *Optional*</span>
+                  <span className="text-darkText">Middle Name: *Optional*</span>
                   <input
                     id="mname"
                     type="text"
@@ -85,7 +85,7 @@ export default function AddGenre() {
               </div>
               <div>
                 <label htmlFor="lname" className="block mb-6">
-                  <span className="text-darkText">Last Name</span>
+                  <span className="text-darkText">Last Name:</span>
                   <input
                     id="lname"
                     type="text"

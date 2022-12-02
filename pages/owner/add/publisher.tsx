@@ -112,7 +112,7 @@ export default function AddPublisher() {
               <div className="form-widget">
                 <div>
                   <label htmlFor="name" className="block mb-6">
-                    <span className="text-darkText">Publisher Name</span>
+                    <span className="text-darkText">Publisher Name:</span>
                     <input
                       id="name"
                       type="text"
@@ -125,7 +125,7 @@ export default function AddPublisher() {
                 </div>
                 <div>
                   <label htmlFor="email" className="block mb-6">
-                    <span className="text-darkText">Publisher Email</span>
+                    <span className="text-darkText">Publisher Email:</span>
                     <input
                       id="email"
                       type="text"
@@ -138,7 +138,7 @@ export default function AddPublisher() {
                 </div>
                 <div>
                   <label htmlFor="phone_nums" className="block mb-6">
-                    <span className="text-darkText">Phone Numbers</span>
+                    <span className="text-darkText">Phone Numbers:</span>
                     {phoneNums.map((num, index) => (
                       <input
                         id="phone_nums"
@@ -189,7 +189,7 @@ export default function AddPublisher() {
                 </div>
                 <div>
                   <label htmlFor="address" className="block mb-6">
-                    <span className="text-darkText">Address</span>
+                    <span className="text-darkText">Address:</span>
                     <input
                       id="address"
                       type="text"
@@ -203,7 +203,7 @@ export default function AddPublisher() {
                 <div>
                   <label htmlFor="apartment_suite" className="block mb-6">
                     <span className="text-darkText">
-                      Apartment/Suite/Company
+                      Apartment/Suite/Company:
                     </span>
                     <input
                       id="apartment_suite"
@@ -217,7 +217,7 @@ export default function AddPublisher() {
                 </div>
                 <div>
                   <label htmlFor="country" className="block mb-6">
-                    <span className="text-darkText">Country</span>
+                    <span className="text-darkText">Country:</span>
                     <input
                       id="country"
                       type="text"
@@ -230,7 +230,7 @@ export default function AddPublisher() {
                 </div>
                 <div>
                   <label htmlFor="city" className="block mb-6">
-                    <span className="text-darkText">City</span>
+                    <span className="text-darkText">City:</span>
                     <input
                       id="city"
                       type="text"
@@ -243,7 +243,7 @@ export default function AddPublisher() {
                 </div>
                 <div>
                   <label htmlFor="state" className="block mb-6">
-                    <span className="text-darkText">State/Province</span>
+                    <span className="text-darkText">State/Province:</span>
                     <input
                       id="state"
                       type="text"
@@ -256,7 +256,7 @@ export default function AddPublisher() {
                 </div>
                 <div>
                   <label htmlFor="zip_code" className="block mb-6">
-                    <span className="text-darkText">Postal Code</span>
+                    <span className="text-darkText">Postal Code:</span>
                     <input
                       id="zip_code"
                       type="text"
@@ -272,7 +272,7 @@ export default function AddPublisher() {
                 </h2>
                 <div>
                   <label htmlFor="transit" className="block mb-6">
-                    <span className="text-darkText">Transit Number</span>
+                    <span className="text-darkText">Transit Number:</span>
                     <input
                       id="transit"
                       type="number"
@@ -286,7 +286,7 @@ export default function AddPublisher() {
                 </div>
                 <div>
                   <label htmlFor="institution" className="block mb-6">
-                    <span className="text-darkText">Institution Number</span>
+                    <span className="text-darkText">Institution Number:</span>
                     <input
                       id="institution"
                       type="number"
@@ -300,7 +300,7 @@ export default function AddPublisher() {
                 </div>
                 <div>
                   <label htmlFor="account" className="block mb-6">
-                    <span className="text-darkText">Account Number</span>
+                    <span className="text-darkText">Account Number:</span>
                     <input
                       id="account"
                       type="number"
