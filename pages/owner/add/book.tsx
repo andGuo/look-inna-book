@@ -9,7 +9,6 @@ import Layout from "../../../components/Layout";
 import BookImage from "../../../components/BookImage";
 import Select from "react-select";
 import { NumericFormat } from "react-number-format";
-import CurrencyInput from "react-currency-input-field";
 type Publisher = Database["public"]["Tables"]["publishers"]["Row"];
 type Author = Database["public"]["Tables"]["authors"]["Row"];
 type Genre = Database["public"]["Tables"]["genres"]["Row"];
