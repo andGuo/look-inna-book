@@ -17,22 +17,22 @@ const Home = () => {
             </h1>
             <ul className="grid-cols-3 list-disc">
               <li className="redirectButton">
-                <Link href="add/book">Add New Book</Link>
+                <Link href="owner/add/book">Add New Book</Link>
               </li>
               <li className="redirectButton">
-                <Link href="remove/book">Remove Books</Link>
+                <Link href="owner/remove/book">Remove Books</Link>
               </li>
               <li className="redirectButton">
-                <Link href="add/author">Add Author</Link>
+                <Link href="owner/add/author">Add Author</Link>
               </li>
               <li className="redirectButton">
-                <Link href="add/publisher">Add Publisher</Link>
+                <Link href="owner/add/publisher">Add Publisher</Link>
               </li>
               <li className="redirectButton">
-                <Link href="add/genre">Add Genre</Link>
+                <Link href="owner/add/genre">Add Genre</Link>
               </li>
               <li className="redirectButton">
-                <Link href="report">Generate Report</Link>
+                <Link href="owner/report">Generate Report</Link>
               </li>
             </ul>
           </div>
