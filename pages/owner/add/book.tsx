@@ -8,6 +8,7 @@ import { Database } from "../../../utils/database.types";
 import Layout from "../../../components/Layout";
 import BookImage from "../../../components/BookImage";
 import Select from "react-select";
+import CurrencyInput from "react-currency-input-field";
 type Publisher = Database["public"]["Tables"]["publishers"]["Row"];
 type Author = Database["public"]["Tables"]["authors"]["Row"];
 type Genre = Database["public"]["Tables"]["genres"]["Row"];
@@ -203,14 +204,14 @@ export default function AddPublisher() {
                 <div>
                   <label htmlFor="msrp" className="block mb-6">
                     <span className="text-darkText">Book Retail Price</span>
-                    <input
+                    <CurrencyInput
                       id="msrp"
-                      type="number"
-                      step="0.01"
-                      value={msrp || ""}
-                      onChange={(e) => setMsrp(Number(e.target.value))}
+                      name="input-msrp"
+                      placeholder="Enter price"
+                      decimalsLimit={2}
+                      prefix="$"
+                      onValueChange={(value, name) => setMsrp(Number(value))}
                       className="inputField"
-                      placeholder=""
                     />
                   </label>
                 </div>
