@@ -22,10 +22,11 @@ export async function middleware(req: NextRequest) {
 
   if (session) {
     let { data, error, status } = await supabase.rpc(
-      "isOwner",
-      session.user.id
+      "is_owner",
+      {pid: session.user.id}
     );
-    if (false) {
+
+    if (data) {
       // Authentication successful, forward request to protected route.
       return res;
     }
