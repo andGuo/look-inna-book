@@ -268,6 +268,7 @@ export default function AddPublisher() {
                         placeholder="ex. 0.125 is 12.5%"
                         decimalScale={0}
                         prefix="0."
+                        maxLength={7}
                       />
                     </label>
                   </div>
