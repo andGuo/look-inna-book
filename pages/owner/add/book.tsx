@@ -27,7 +27,8 @@ export default function AddPublisher() {
   const [pubPercentage, setPubPercentage] =
     useState<Book["pub_percentage"]>(0.0);
   const [imgUrl, setImgUrl] = useState<Book["img_url"]>("");
-  const [selectPublisher, setSelectPublisher] = useState<Book["publisher_id"]>("");
+  const [selectPublisher, setSelectPublisher] =
+    useState<Book["publisher_id"]>("");
   const [selectGenres, setSelectGenres] = useState<Genre["name"][]>([]);
   const [selectAuthors, setSelectAuthors] = useState<Author["author_id"][]>([]);
   const [publishers, setPublishers] = useState<Publisher[]>([]);
@@ -119,32 +120,49 @@ export default function AddPublisher() {
   }
 
   async function addBook({
+    isbn,
     title,
     msrp,
     num_pages,
     pub_percentage,
-    img_url,
     publisher_id,
+    authors,
+    genres,
+    img_url,
   }: {
+    isbn: Book["isbn"];
     title: Book["title"];
     msrp: Book["msrp"];
     num_pages: Book["num_pages"];
     pub_percentage: Book["pub_percentage"];
-    img_url: Book["img_url"];
     publisher_id: Book["publisher_id"];
+    authors: Author["author_id"][];
+    genres: Genre["name"][];
+    img_url?: Book["img_url"];
   }) {
     try {
       if (!user) throw new Error("No user");
-      if (!title || !msrp || !num_pages || !pub_percentage || !publisher_id)
+      if (
+        !isbn ||
+        !title ||
+        !msrp ||
+        !num_pages ||
+        !pub_percentage ||
+        !publisher_id ||
+        !authors
+      )
         throw new Error("Book Info Incomplete");
 
       const newBook = {
-        name,
+        isbn,
+        title,
         msrp,
         num_pages,
         pub_percentage,
-        img_url,
         publisher_id,
+        authors,
+        genres,
+        img_url,
       };
 
       let { data, error } = await supabase.rpc("create_book", newBook);
@@ -238,7 +256,7 @@ export default function AddPublisher() {
                     <label htmlFor="pubPercentage" className="block mb-6">
                       <span className="text-darkText">
                         Publisher Commission Percentage (As a fractional):
-                      </span> 
+                      </span>
                       <NumericFormat
                         allowNegative={false}
                         id="pubPercentage"
@@ -262,7 +280,9 @@ export default function AddPublisher() {
                           value: pub.publisher_id,
                           label: `${pub.name} - (${pub.email})`,
                         }))}
-                        onChange={(e) => {setSelectPublisher(e.value)}}
+                        onChange={(e) => {
+                          setSelectPublisher(e.value);
+                        }}
                       />
                     </label>
                   </div>
@@ -276,7 +296,9 @@ export default function AddPublisher() {
                           value: author.author_id,
                           label: `${author.first_name} ${author.middle_name} ${author.last_name}`,
                         }))}
-                        onChange={(e) => {setSelectAuthors(e.flatMap(a => a.value))}}
+                        onChange={(e) => {
+                          setSelectAuthors(e.flatMap((a) => a.value));
+                        }}
                       />
                     </label>
                   </div>
@@ -290,7 +312,9 @@ export default function AddPublisher() {
                           value: gen.name,
                           label: `${gen.name}`,
                         }))}
-                        onChange={(e) => {setSelectGenres(e.flatMap(g => g.value))}}
+                        onChange={(e) => {
+                          setSelectGenres(e.flatMap((g) => g.value));
+                        }}
                       />
                     </label>
                   </div>
@@ -300,12 +324,14 @@ export default function AddPublisher() {
                       className="saveButton"
                       onClick={() =>
                         addBook({
+                          isbn,
                           title,
                           msrp,
                           num_pages: numPages,
                           pub_percentage: pubPercentage,
-                          img_url: imgUrl,
-                          publisher_id: publisherId,
+                          publisher_id: selectPublisher,
+                          authors: selectAuthors,
+                          genres: selectGenres,
                         })
                       }
                       disabled={loading}
