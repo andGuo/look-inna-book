@@ -271,7 +271,7 @@ export default function AddPublisher() {
                     </label>
                   </div>
                   <div>
-                    <label htmlFor="pubPercentage" className="block mb-6">
+                    <label className="block mb-6">
                       <span className="text-darkText">Genre(s):</span>
                       <Select
                         isMulti
