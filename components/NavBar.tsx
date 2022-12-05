@@ -32,6 +32,9 @@ const NavBar = () => {
             <Link href="/user">Profile</Link>
           </li>
           <li className="navBtn">
+            <Link href="/user/orders">Orders</Link>
+          </li>
+          <li className="navBtn">
             <Link href="/owner">Owner Page</Link>
           </li>
           <li className="navBtn flex">
