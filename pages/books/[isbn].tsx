@@ -80,7 +80,7 @@ const BookSalePage = ({
       }
   
       const newCartBook = {
-        cid: user.id,
+        pid: user.id,
         isbn_: isbn,
         quantity: purchase_quantity,
       };
