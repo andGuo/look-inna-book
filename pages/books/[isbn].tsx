@@ -18,18 +18,18 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const { data: books, error: e1 } = await supabase
     .from("books")
-    .select("title, msrp, num_pages, img_url, publisher_id, instock_quantity")
+    .select("isbn, title, msrp, num_pages, img_url, publisher_id, instock_quantity")
     .eq("isbn", isbn_id)
     .single();
 
   const { data: authors, error: e2 } = await supabase
     .from("authored")
-    .select("author_id (first_name, middle_name, last_name)")
+    .select("author_id (author_id, first_name, middle_name, last_name)")
     .eq("isbn", isbn_id);
 
   const { data: publisher, error: e3 } = await supabase
     .from("publishers")
-    .select("name, email")
+    .select("publisher_id, name, email")
     .eq("publisher_id", books?.publisher_id);
 
   console.log(books, authors, publisher);
@@ -142,12 +142,12 @@ const BookSalePage = ({
                     <span className="text-draculaYellow">Authored by:</span>
                     <ul className="list-disc list-inside">
                       {authors.map((author) => (
-                        <li className="text-lg">{`${author.author_id.first_name} ${author.author_id.middle_name} ${author.author_id.last_name}`}</li>
+                        <li key={author.author_id.author_id} className="text-lg">{`${author.author_id.first_name} ${author.author_id.middle_name} ${author.author_id.last_name}`}</li>
                       ))}
                     </ul>
                   </div>
                   {publisher.map((publisher) => (
-                    <div className="flex flex-col">
+                    <div key={publisher.publisher_id} className="flex flex-col">
                       <span className="text-draculaYellow">Published by: </span>{" "}
                       <span className="text-lg">{`${publisher.name} - (${publisher.email})`}</span>
                     </div>
