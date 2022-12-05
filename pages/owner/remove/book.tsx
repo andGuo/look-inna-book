@@ -84,8 +84,7 @@ const Home = ({ books }: { books: Book[] }) => {
                   </div>
                 )}
                 <div className="flex flex-col justify-center px-2 py-4 mx-2 text-2xl text-darkText text-center min-w-full">
-                  <div className="text-draculaCyan">{`${book.title}`} </div>{" "}
-                  <div>-</div>{" "}
+                <div className="text-draculaCyan">{`${book.title}`} </div> <div>-</div> <div className="text-draculaYellow mb-2">{`(${book.isbn})`}</div>
                   <button
                     type="button"
                     className="saveButton hover:text-darkText enabled:hover:bg-draculaRed text-lg"
