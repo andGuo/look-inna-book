@@ -153,7 +153,7 @@ export default function AddPublisher() {
         !pub_percentage ||
         !publisher_id ||
         !authors
-      ) { 
+      ) {
         throw new Error("Book Info Incomplete");
       }
 
@@ -190,7 +190,7 @@ export default function AddPublisher() {
               <h1 className="text-draculaPink text-3xl pb-4 text-center">
                 Add Book
               </h1>
-              <div className="m-1 p-1">
+              {/*<div className="m-1 p-1">
                 <BookImage
                   uuid={uuid}
                   url={""}
@@ -199,7 +199,7 @@ export default function AddPublisher() {
                     setImgUrl(url);
                   }}
                 />
-              </div>
+              </div>*/}
               <div className="form-widget">
                 <div>
                   <label htmlFor="isbn" className="block mb-6">
