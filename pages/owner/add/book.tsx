@@ -153,16 +153,7 @@ export default function AddPublisher() {
         !pub_percentage ||
         !publisher_id ||
         !authors
-      ) {
-        console.log(
-          isbn,
-          title,
-          msrp,
-          num_pages,
-          pub_percentage,
-          publisher_id,
-          authors
-        );
+      ) { 
         throw new Error("Book Info Incomplete");
       }
 

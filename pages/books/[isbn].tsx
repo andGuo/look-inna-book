@@ -1,7 +1,7 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import Layout from "../../components/Layout";
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useUser, useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Database } from "../../utils/database.types";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { useState } from "react";
@@ -9,6 +9,7 @@ import { NumericFormat } from "react-number-format";
 type Author = Database["public"]["Tables"]["authors"]["Row"];
 type Publisher = Database["public"]["Tables"]["publishers"]["Row"];
 type Book = Database["public"]["Tables"]["books"]["Row"];
+type CartBooks = Database["public"]["Tables"]["cart_books"]["Row"];
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const supabase = createServerSupabaseClient(ctx);
@@ -62,6 +63,40 @@ const BookSalePage = ({
   const session = useSession();
   const supabase = useSupabaseClient();
   const [quantity, setQuantity] = useState(0);
+  const user = useUser();
+
+  async function addToCart({
+    isbn,
+    purchase_quantity,
+  }: {
+    isbn:CartBooks["isbn"];
+    purchase_quantity:CartBooks["quantity"];
+  }) {
+    try {
+      if (!user) throw new Error("No user");
+      if (
+        !isbn ||
+        !purchase_quantity
+      ) {
+        throw new Error("Add to Cart Info Incomplete");
+      }
+  
+      const newCartBook = {
+        cart_id: user.id,
+        isbn,
+        quantity: purchase_quantity,
+      };
+  
+      let { data, error } = await supabase.rpc("add_to_cart", newCartBook);
+  
+      if (error) console.error(error);
+      if (error) throw error;
+      alert("Added to cart!");
+    } catch (error) {
+      alert("Error unable to add to cart!");
+      console.log(error);
+    }
+  }
 
   return (
     <Layout
@@ -147,7 +182,12 @@ const BookSalePage = ({
                   <button
                     type="submit"
                     className="saveButton"
-                    onClick={() => {}}
+                    onClick={() =>
+                      addToCart({
+                        isbn: book.isbn,
+                        purchase_quantity: quantity,
+                      })
+                    }
                     disabled={book.instock_quantity <= 0}
                   >
                     Add to Cart
