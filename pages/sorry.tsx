@@ -9,7 +9,7 @@ const Sorry = () => {
           <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl flex flex-col justify-center items-center">
             <h1 className="text-6xl mb-4 text-draculaRed">Sorry!</h1>
             <h2 className="text-3xl mb-4 text-darkText text-center">
-              You do not have permission to view that page. Contact andGuo if this shouldn't be the case.
+              You do not have permission to view that page or something went wrong. Contact andGuo if this shouldn't be the case.
             </h2>
             <button className="bg-draculaRed hover:bg-draculaPink text-white font-bold py-2 px-4 border-b-4 border-draculaPink hover:border-draculaGreen rounded">
               <Link className="text-3xl" href="/">
