@@ -1,7 +1,11 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import Layout from "../../components/Layout";
-import { useUser, useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import {
+  useUser,
+  useSession,
+  useSupabaseClient,
+} from "@supabase/auth-helpers-react";
 import { Database } from "../../utils/database.types";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { useState } from "react";
@@ -18,7 +22,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const { data: books, error: e1 } = await supabase
     .from("books")
-    .select("isbn, title, msrp, num_pages, img_url, publisher_id, instock_quantity")
+    .select(
+      "isbn, title, msrp, num_pages, img_url, publisher_id, instock_quantity"
+    )
     .eq("isbn", isbn_id)
     .single();
 
@@ -67,25 +73,25 @@ const BookSalePage = ({
     isbn,
     purchase_quantity,
   }: {
-    isbn:CartBooks["isbn"];
-    purchase_quantity:CartBooks["quantity"];
+    isbn: CartBooks["isbn"];
+    purchase_quantity: CartBooks["quantity"];
   }) {
     try {
       if (!user) throw new Error("No user");
-      if (
-        !isbn ||
-        !purchase_quantity
-      ) {
+      if (!isbn || !purchase_quantity) {
         throw new Error("Add to Cart Info Incomplete");
       }
-  
+
       const newCartBook = {
         pid: user.id,
         isbn_: isbn,
         quantity: purchase_quantity,
       };
-  
-      let { data, error, status } = await supabase.rpc("add_to_cart", newCartBook);
+
+      let { data, error, status } = await supabase.rpc(
+        "add_to_cart",
+        newCartBook
+      );
 
       if (error) console.error(error);
       if (error) throw error;
@@ -97,13 +103,7 @@ const BookSalePage = ({
   }
 
   return (
-    <Layout
-      title={
-        !session
-          ? "Login | Look-Inna-Book"
-          : `${book.title} [In-Stock] | Look-Inna-Book`
-      }
-    >
+    <Layout title={`${book.title} [In-Stock] | Look-Inna-Book`}>
       <div className="flex flex-wrap flex-col items-center justify-around sm:my-14 sm:flex-row sm:items-start sm:justify-center">
         <div className="lg:w-2/5 sm:w-1/2">
           <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
@@ -131,16 +131,16 @@ const BookSalePage = ({
                   <span className="text-2xl">${book.msrp.toFixed(2)} CAD</span>
                   <div>
                     <span className="text-draculaYellow">Number of pages:</span>
-                    <span>
-                      {" "}
-                      {book.num_pages}
-                    </span>
+                    <span> {book.num_pages}</span>
                   </div>
                   <div>
                     <span className="text-draculaYellow">Authored by:</span>
                     <ul className="list-disc list-inside">
                       {authors.map((author) => (
-                        <li key={author.author_id.author_id} className="text-lg">{`${author.author_id.first_name} ${author.author_id.middle_name} ${author.author_id.last_name}`}</li>
+                        <li
+                          key={author.author_id.author_id}
+                          className="text-lg"
+                        >{`${author.author_id.first_name} ${author.author_id.middle_name} ${author.author_id.last_name}`}</li>
                       ))}
                     </ul>
                   </div>

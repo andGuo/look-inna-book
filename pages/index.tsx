@@ -50,7 +50,7 @@ const Home = ({ books }: { books: Book[] }) => {
           {shownBooks.map((book) => (
             <div className="rounded-2xl drop-shadow-xl hover:drop-shadow-2xl bg-darkPrimary m-3">
               <Link href={`/books/${book.isbn}`}>
-                <div className="flex flex-col justify-center items-center p-4 max-h-fit">
+                <div className="flex flex-col justify-center items-center p-4 max-h-max min-h-max">
                   {book.img_url ? (
                     <img
                       src={book.img_url}
