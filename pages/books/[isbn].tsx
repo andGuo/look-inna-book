@@ -128,7 +128,7 @@ const BookSalePage = ({
                   {`Title: ${book.title}`}
                 </h1>
                 <div className="text-darkText text-xl flex flex-col gap-2 pb-2">
-                  <span className="text-2xl">${book.msrp} CAD</span>
+                  <span className="text-2xl">${book.msrp.toFixed(2)} CAD</span>
                   <div>
                     <span className="text-draculaYellow">Number of pages:</span>
                     <span>
