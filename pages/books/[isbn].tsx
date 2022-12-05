@@ -32,8 +32,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     .select("publisher_id, name, email")
     .eq("publisher_id", books?.publisher_id);
 
-  console.log(books, authors, publisher);
-
   if (e1 || e2 || e3)
     return {
       redirect: {
@@ -82,16 +80,16 @@ const BookSalePage = ({
       }
   
       const newCartBook = {
-        cart_id: user.id,
-        isbn,
+        cid: user.id,
+        isbn_: isbn,
         quantity: purchase_quantity,
       };
   
-      let { data, error } = await supabase.rpc("add_to_cart", newCartBook);
-  
+      let { data, error, status } = await supabase.rpc("add_to_cart", newCartBook);
+
       if (error) console.error(error);
       if (error) throw error;
-      alert("Added to cart!");
+      alert("Updated cart!");
     } catch (error) {
       alert("Error unable to add to cart!");
       console.log(error);
