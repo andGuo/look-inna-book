@@ -40,7 +40,7 @@ const Home = ({ books }: { books: Book[] }) => {
   async function removeBook({ isbn }: { isbn: Book["isbn"] }) {
     try {
       const book = {
-        isbn,
+        isbn_: isbn,
       };
 
       let { data, error } = await supabase.rpc("remove_book", book);
