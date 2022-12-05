@@ -94,22 +94,36 @@ const BookSalePage = ({
                 <h1 className="text-draculaPink text-3xl pb-4 text-center">
                   {`Title: ${book.title}`}
                 </h1>
-                <div className="text-darkText text-2xl flex flex-col">
-                  <span>${book.msrp}</span>
-                  <span>Number of pages: {book.num_pages}</span>
-                  <span>Authored by:</span>
-                  <ul className="list-disc">
-                    {authors.map((author) => (
-                      <li>{`${author.author_id.first_name} ${author.author_id.middle_name} ${author.author_id.last_name}`}</li>
-                    ))}
-                  </ul>
-                  <span>Published by: </span>
-                  {publisher.map((publisher) => (
+                <div className="text-darkText text-xl flex flex-col gap-2 pb-2">
+                  <span className="text-2xl">${book.msrp} CAD</span>
+                  <div>
+                    <span className="text-draculaYellow">Number of pages:</span>
                     <span>
-                      {`${publisher.name} - (${publisher.email})`}
+                      {" "}
+                      {book.num_pages}
                     </span>
+                  </div>
+                  <div>
+                    <span className="text-draculaYellow">Authored by:</span>
+                    <ul className="list-disc list-inside">
+                      {authors.map((author) => (
+                        <li className="text-lg">{`${author.author_id.first_name} ${author.author_id.middle_name} ${author.author_id.last_name}`}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  {publisher.map((publisher) => (
+                    <div className="flex flex-col">
+                      <span className="text-draculaYellow">Published by: </span>{" "}
+                      <span className="text-lg">{`${publisher.name} - (${publisher.email})`}</span>
+                    </div>
                   ))}
-                  <span>Remaining Stock: {book.instock_quantity}</span>
+                  <div>
+                    <span className="text-draculaYellow">Remaining Stock:</span>
+                    <span>
+                      {" "}
+                      {book.instock_quantity || "0 - (Out of Stock!)"}
+                    </span>
+                  </div>
                 </div>
                 <label htmlFor="quantity" className="block mb-6">
                   <span className="text-darkText">Purchase Quantity:</span>
