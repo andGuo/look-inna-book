@@ -48,7 +48,7 @@ const Home = ({ books }: { books: Book[] }) => {
       <div className="flex flex-wrap flex-col items-center justify-around sm:my-4 sm:flex-row sm:items-start sm:justify-center">
         <div className="col-span-3 grid grid-cols-3 items-center p-2 m-4 lg:w-4/5 sm:w-2/3">
           {shownBooks.map((book) => (
-            <div className="rounded-2xl drop-shadow-xl hover:drop-shadow-2xl bg-darkPrimary m-3">
+            <div key={book.isbn} className="rounded-2xl drop-shadow-xl hover:drop-shadow-2xl bg-darkPrimary m-3">
               <Link href={`/books/${book.isbn}`}>
                 <div className="flex flex-col justify-center items-center p-4 max-h-max min-h-max">
                   {book.img_url ? (
