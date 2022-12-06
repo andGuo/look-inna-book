@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
-import { useUser, useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import {
+  useUser,
+  useSession,
+  useSupabaseClient,
+} from "@supabase/auth-helpers-react";
 import Layout from "../components/Layout";
 import Profile from "../components/Profile";
 import { Database } from "../utils/database.types";
@@ -16,16 +20,19 @@ const Home = () => {
   const [shipFname, setShipFname] = useState<ShipAddress["first_name"]>("");
   const [shipLname, setShipLname] = useState<ShipAddress["last_name"]>("");
   const [shipAddr, setShipAddr] = useState<ShipAddress["address"]>("");
-  const [shipAptSuite, setShipAptSuite] = useState<ShipAddress["apartment_suite"]>(null);
+  const [shipAptSuite, setShipAptSuite] =
+    useState<ShipAddress["apartment_suite"]>(null);
   const [shipCountry, setShipCountry] = useState<ShipAddress["country"]>("");
   const [shipCity, setShipCity] = useState<ShipAddress["city"]>("");
   const [shipState, setShipState] = useState<ShipAddress["state"]>("");
   const [shipZipCode, setShipZipCode] = useState<ShipAddress["zip_code"]>("");
-  const [shipPhoneNum, setShipPhoneNum] = useState<ShipAddress["phone_number"]>("");
+  const [shipPhoneNum, setShipPhoneNum] =
+    useState<ShipAddress["phone_number"]>("");
   const [billFname, setBillFname] = useState<BillAddress["first_name"]>("");
   const [billLname, setBillLname] = useState<BillAddress["last_name"]>("");
   const [billAddr, setBillAddr] = useState<BillAddress["address"]>("");
-  const [billAptSuite, setBillAptSuite] = useState<BillAddress["apartment_suite"]>(null);
+  const [billAptSuite, setBillAptSuite] =
+    useState<BillAddress["apartment_suite"]>(null);
   const [billCountry, setBillCountry] = useState<BillAddress["country"]>("");
   const [billCity, setBillCity] = useState<BillAddress["city"]>("");
   const [billState, setBillState] = useState<BillAddress["state"]>("");
@@ -88,7 +95,7 @@ const Home = () => {
 
   return (
     <Layout title={"Cart | Look-Inna-Book"}>
-      <div className="flex flex-wrap flex-col items-center justify-around sm:my-14 sm:flex-row sm:items-start sm:justify-center">
+      <div className="flex flex-wrap flex-col items-center justify-center">
         {!session ? (
           <div className="lg:w-2/5 sm:w-1/2">
             <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
@@ -109,11 +116,19 @@ const Home = () => {
             </div>
           </div>
         ) : (
-          <div className="col-span-3 grid grid-cols-3 items-center p-2 m-4 lg:w-4/5 sm:w-2/3">
+          <div className="col-span-3 grid lg:grid-cols-3 items-center p-2 m-4 lg:w-5/6 sm:w-2/3 gap-x-5">
             <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
               <div>
                 <h1 className="text-draculaPink text-3xl pb-4 text-center">
-                  User Info
+                  Billing Address Info
+                </h1>
+                <Profile session={session} />
+              </div>
+            </div>
+            <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
+              <div>
+                <h1 className="text-draculaPink text-3xl pb-4 text-center">
+                  Billing Address Info
                 </h1>
                 <Profile session={session} />
               </div>

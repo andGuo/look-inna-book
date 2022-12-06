@@ -64,7 +64,7 @@ const Home = ({ books }: { books: Book[] }) => {
             <div>No books to remove ¯\_(ツ)_/¯</div>
           )}
         </div>
-        <div className="col-span-3 grid grid-cols-3 items-center p-2 m-4 lg:w-4/5 sm:w-2/3">
+        <div className="col-span-3 grid lg:grid-cols-3 items-center p-2 m-4 lg:w-4/5 sm:w-2/3">
           {shownBooks.map((book) => (
             <div
               key={book.isbn}
