@@ -17,7 +17,7 @@ const Home = () => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [shownBooks, setShownBooks] = useState<any[]>([]);
-  const [loading, setLoading] = useState<Boolean>(true);
+  const [loading, setLoading] = useState(true);
   const [shipFname, setShipFname] = useState<ShipAddress["first_name"]>("");
   const [shipLname, setShipLname] = useState<ShipAddress["last_name"]>("");
   const [shipAddr, setShipAddr] = useState<ShipAddress["address"]>("");
@@ -112,7 +112,7 @@ const Home = () => {
     <Layout title={"Cart | Look-Inna-Book"}>
       <div className="flex flex-wrap flex-col items-center justify-center">
         {!session ? (
-          <div className="lg:w-2/5 sm:w-1/2">
+          <div className="lg:w-2/5 sm:w-1/2 sm:my-14 sm:flex-row sm:items-start sm:justify-center">
             <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
               <div>
                 <h1 className="text-draculaGreen text-3xl pb-4 text-center">
@@ -388,6 +388,18 @@ const Home = () => {
                 <hr className="my-4 rounded border-draculaGreen border-2"/>
                 <div>Total Price: ${shownBooks.reduce((acc, book) => acc + book.msrp * book.purchase_quantity, 0).toFixed(2)}</div>
                 <div>Total Number of Books: {shownBooks.reduce((acc, book) => acc + book.purchase_quantity, 0)}</div>
+                <div className="mt-4 flex justify-center">
+                    <button
+                      type="submit"
+                      className="saveButton"
+                      onClick={() =>
+                        {}
+                      }
+                      disabled={loading}
+                    >
+                      Place Order
+                    </button>
+                  </div>
               </div>
             </div>
           </div>
