@@ -16,7 +16,8 @@ const Home = () => {
   const session = useSession();
   const supabase = useSupabaseClient();
   const user = useUser();
-  const [loading, setLoading] = useState(true);
+  const [shownBooks, setShownBooks] = useState<any[]>([]);
+  const [loading, setLoading] = useState<Boolean>(true);
   const [shipFname, setShipFname] = useState<ShipAddress["first_name"]>("");
   const [shipLname, setShipLname] = useState<ShipAddress["last_name"]>("");
   const [shipAddr, setShipAddr] = useState<ShipAddress["address"]>("");
@@ -40,7 +41,8 @@ const Home = () => {
 
   useEffect(() => {
     getProfileAddr();
-  }, [user]);
+    getCartItems();
+  }, [session]);
 
   // Sets default billing and shipping to user profile adderess
   async function getProfileAddr() {
@@ -87,9 +89,23 @@ const Home = () => {
       }
     } catch (error) {
       //alert("Error loading default user data!");
-      console.log(error);
+      console.debug(error);
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function getCartItems() {
+    try {
+      if (!user) throw new Error("No user");
+
+      const { data, error } = await supabase.rpc("get_profile_cart", {uid: user.id});
+
+      if (error) throw error;
+      if (data) setShownBooks(data);
+      console.log(data);
+    } catch (error) {
+      console.debug(error);
     }
   }
 
@@ -365,7 +381,6 @@ const Home = () => {
                 <h1 className="text-draculaPink text-3xl pb-4 text-center">
                   Cart
                 </h1>
-                
               </div>
             </div>
           </div>
