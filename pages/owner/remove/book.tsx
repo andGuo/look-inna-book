@@ -56,7 +56,14 @@ const Home = ({ books }: { books: Book[] }) => {
 
   return (
     <Layout title={"Home | Look-Inna-Book"}>
-      <div className="flex flex-wrap flex-col items-center justify-around sm:my-4 sm:flex-row sm:items-start sm:justify-center">
+      <div className="flex flex-wrap flex-col items-center justify-center">
+        <div className="text-center text-draculaYellow text-4xl my-2">
+          {books.length > 0 ? (
+            <div>Welcome!</div>
+          ) : (
+            <div>No books to remove ¯\_(ツ)_/¯</div>
+          )}
+        </div>
         <div className="col-span-3 grid grid-cols-3 items-center p-2 m-4 lg:w-4/5 sm:w-2/3">
           {shownBooks.map((book) => (
             <div
@@ -84,7 +91,9 @@ const Home = ({ books }: { books: Book[] }) => {
                   </div>
                 )}
                 <div className="flex flex-col justify-center px-2 py-4 mx-2 text-2xl text-darkText text-center min-w-full">
-                <div className="text-draculaCyan">{`${book.title}`} </div> <div>-</div> <div className="text-draculaYellow mb-2">{`(${book.isbn})`}</div>
+                  <div className="text-draculaCyan">{`${book.title}`} </div>{" "}
+                  <div>-</div>{" "}
+                  <div className="text-draculaYellow mb-2">{`(${book.isbn})`}</div>
                   <button
                     type="button"
                     className="saveButton hover:text-darkText enabled:hover:bg-draculaRed text-lg"

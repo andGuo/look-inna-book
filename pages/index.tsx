@@ -45,10 +45,20 @@ const Home = ({ books }: { books: Book[] }) => {
 
   return (
     <Layout title={"Home | Look-Inna-Book"}>
-      <div className="flex flex-wrap flex-col items-center justify-around sm:my-4 sm:flex-row sm:items-start sm:justify-center">
+      <div className="flex flex-wrap flex-col items-center justify-center">
+        <div className="text-center text-draculaYellow text-4xl my-2">
+          {books.length > 0 ? (
+            <div>Welcome!</div>
+          ) : (
+            <div>Outta books ¯\_(ツ)_/¯</div>
+          )}
+        </div>
         <div className="col-span-3 grid grid-cols-3 items-center p-2 m-4 lg:w-4/5 sm:w-2/3">
           {shownBooks.map((book) => (
-            <div key={book.isbn} className="rounded-2xl drop-shadow-xl hover:drop-shadow-2xl bg-darkPrimary m-3">
+            <div
+              key={book.isbn}
+              className="rounded-2xl drop-shadow-xl hover:drop-shadow-2xl bg-darkPrimary m-3"
+            >
               <Link href={`/books/${book.isbn}`}>
                 <div className="flex flex-col justify-center items-center p-4 max-h-max min-h-max">
                   {book.img_url ? (
@@ -75,7 +85,11 @@ const Home = ({ books }: { books: Book[] }) => {
                     </div>
                   )}
                   <div className="flex flex-col justify-center px-2 py-4 mx-2 text-2xl text-darkText text-center">
-                    <div className="text-draculaCyan">{`${book.title}`} </div> <div>-</div> <div className="text-draculaPurple">{`$${book.msrp.toFixed(2)}`}</div>
+                    <div className="text-draculaCyan">{`${book.title}`} </div>{" "}
+                    <div>-</div>{" "}
+                    <div className="text-draculaPurple">{`$${book.msrp.toFixed(
+                      2
+                    )}`}</div>
                   </div>
                 </div>
               </Link>
