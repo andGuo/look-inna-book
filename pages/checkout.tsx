@@ -40,7 +40,7 @@ const Home = () => {
 
   useEffect(() => {
     getProfileAddr();
-  }, [session]);
+  }, [user]);
 
   // Sets default billing and shipping to user profile adderess
   async function getProfileAddr() {
@@ -86,7 +86,7 @@ const Home = () => {
         }
       }
     } catch (error) {
-      alert("Error loading default user data!");
+      //alert("Error loading default user data!");
       console.log(error);
     } finally {
       setLoading(false);
@@ -116,21 +116,256 @@ const Home = () => {
             </div>
           </div>
         ) : (
-          <div className="col-span-3 grid lg:grid-cols-3 items-center p-2 m-4 lg:w-5/6 sm:w-2/3 gap-x-5">
+          <div className="col-span-3 grid lg:grid-cols-3 items-center p-2 m-4 lg:w-5/6 sm:w-2/3 gap-x-3">
             <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
               <div>
                 <h1 className="text-draculaPink text-3xl pb-4 text-center">
-                  Billing Address Info
+                  Billing Address
                 </h1>
-                <Profile session={session} />
+                <div className="form-widget">
+                  <div>
+                    <label htmlFor="bFname" className="block mb-6">
+                      <span className="text-darkText">First Name</span>
+                      <input
+                        id="bFname"
+                        type="text"
+                        value={billFname || ""}
+                        onChange={(e) => setBillFname(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="bLname" className="block mb-6">
+                      <span className="text-darkText">Last Name</span>
+                      <input
+                        id="bLname"
+                        type="text"
+                        value={billLname || ""}
+                        onChange={(e) => setBillLname(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="bAddress" className="block mb-6">
+                      <span className="text-darkText">Address</span>
+                      <input
+                        id="bAddress"
+                        type="text"
+                        value={billAddr || ""}
+                        onChange={(e) => setBillAddr(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="bApartment_suite" className="block mb-6">
+                      <span className="text-darkText">
+                        Apartment/Suite/Company
+                      </span>
+                      <input
+                        id="bApartment_suite"
+                        type="text"
+                        value={billAptSuite || ""}
+                        onChange={(e) => setBillAptSuite(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="bCountry" className="block mb-6">
+                      <span className="text-darkText">Country</span>
+                      <input
+                        id="bCountry"
+                        type="text"
+                        value={billCountry || ""}
+                        onChange={(e) => setBillCountry(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="bCity" className="block mb-6">
+                      <span className="text-darkText">City</span>
+                      <input
+                        id="bCity"
+                        type="text"
+                        value={billCity || ""}
+                        onChange={(e) => setBillCity(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="bState" className="block mb-6">
+                      <span className="text-darkText">State/Province</span>
+                      <input
+                        id="bState"
+                        type="text"
+                        value={billState || ""}
+                        onChange={(e) => setBillState(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="bZip_code" className="block mb-6">
+                      <span className="text-darkText">Postal Code</span>
+                      <input
+                        id="bZip_code"
+                        type="text"
+                        value={billZipCode || ""}
+                        onChange={(e) => setBillZipCode(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
               <div>
                 <h1 className="text-draculaPink text-3xl pb-4 text-center">
-                  Billing Address Info
+                  Shipping Address
                 </h1>
-                <Profile session={session} />
+                <div className="form-widget">
+                  <div>
+                    <label htmlFor="sFname" className="block mb-6">
+                      <span className="text-darkText">First Name</span>
+                      <input
+                        id="sFname"
+                        type="text"
+                        value={shipFname || ""}
+                        onChange={(e) => setShipFname(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="sLname" className="block mb-6">
+                      <span className="text-darkText">Last Name</span>
+                      <input
+                        id="sLname"
+                        type="text"
+                        value={shipLname || ""}
+                        onChange={(e) => setShipLname(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="sAddress" className="block mb-6">
+                      <span className="text-darkText">Address</span>
+                      <input
+                        id="sAddress"
+                        type="text"
+                        value={shipAddr || ""}
+                        onChange={(e) => setShipAddr(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="sApartment_suite" className="block mb-6">
+                      <span className="text-darkText">
+                        Apartment/Suite/Company
+                      </span>
+                      <input
+                        id="sApartment_suite"
+                        type="text"
+                        value={shipAptSuite || ""}
+                        onChange={(e) => setShipAptSuite(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="sCountry" className="block mb-6">
+                      <span className="text-darkText">Country</span>
+                      <input
+                        id="sCountry"
+                        type="text"
+                        value={shipCountry || ""}
+                        onChange={(e) => setShipCountry(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="sCity" className="block mb-6">
+                      <span className="text-darkText">City</span>
+                      <input
+                        id="sCity"
+                        type="text"
+                        value={shipCity || ""}
+                        onChange={(e) => setShipCity(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="sState" className="block mb-6">
+                      <span className="text-darkText">State/Province</span>
+                      <input
+                        id="sState"
+                        type="text"
+                        value={shipState || ""}
+                        onChange={(e) => setShipState(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="sZip_code" className="block mb-6">
+                      <span className="text-darkText">Postal Code</span>
+                      <input
+                        id="sZip_code"
+                        type="text"
+                        value={shipZipCode || ""}
+                        onChange={(e) => setShipZipCode(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                  <div>
+                    <label htmlFor="sPhone_number" className="block mb-6">
+                      <span className="text-darkText">Phone Number</span>
+                      <input
+                        id="sPhone_number"
+                        type="text"
+                        value={shipPhoneNum || ""}
+                        onChange={(e) => setShipPhoneNum(e.target.value)}
+                        className="inputField"
+                        placeholder=""
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
+              <div>
+                <h1 className="text-draculaPink text-3xl pb-4 text-center">
+                  Cart
+                </h1>
+                
               </div>
             </div>
           </div>
