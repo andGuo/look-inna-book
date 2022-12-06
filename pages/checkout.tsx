@@ -103,7 +103,6 @@ const Home = () => {
 
       if (error) throw error;
       if (data) setShownBooks(data);
-      console.log(data);
     } catch (error) {
       console.debug(error);
     }
@@ -133,7 +132,7 @@ const Home = () => {
           </div>
         ) : (
           <div className="col-span-3 grid lg:grid-cols-3 items-center p-2 m-4 lg:w-5/6 sm:w-2/3 gap-x-3">
-            <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
+            <div className="bg-neutral-800 p-6 rounded-3xl shadow-xl">
               <div>
                 <h1 className="text-draculaPink text-3xl pb-4 text-center">
                   Billing Address
@@ -248,7 +247,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
+            <div className="bg-neutral-800 p-6 rounded-3xl shadow-xl">
               <div>
                 <h1 className="text-draculaPink text-3xl pb-4 text-center">
                   Shipping Address
@@ -376,11 +375,18 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
-              <div>
+            <div className="bg-neutral-800 px-6 pt-4 pb-6 rounded-3xl shadow-xl">
+              <div className="text-darkText text-lg">
                 <h1 className="text-draculaPink text-3xl pb-4 text-center">
                   Cart
                 </h1>
+                <ul className="list-decimal list-inside">
+                {shownBooks.map((book) => (
+                    <li key={book.isbn}>{`${book.title} - (${book.isbn}) x${book.purchase_quantity} @ $${book.msrp.toFixed(2)}`}</li>
+                ))}
+                </ul>
+                <div>Total Price: ${shownBooks.reduce((acc, book) => acc + book.msrp * book.purchase_quantity, 0).toFixed(2)}</div>
+                <div>Total Number of Books: {shownBooks.reduce((acc, book) => acc + book.purchase_quantity, 0)}</div>
               </div>
             </div>
           </div>
