@@ -99,7 +99,9 @@ const Home = () => {
     try {
       if (!user) throw new Error("No user");
 
-      const { data, error } = await supabase.rpc("get_profile_cart", {uid: user.id});
+      const { data, error } = await supabase.rpc("get_profile_cart", {
+        uid: user.id,
+      });
 
       if (error) throw error;
       if (data) setShownBooks(data);
@@ -377,29 +379,49 @@ const Home = () => {
             </div>
             <div className="bg-neutral-800 px-6 pt-4 pb-6 rounded-2xl shadow-xl">
               <div className="text-darkText text-lg">
-                <h1 className="text-draculaPink text-3xl pb-4 text-center">
-                  Cart
-                </h1>
+                {shownBooks.length > 0 ? (
+                  <h1 className="text-draculaPink text-3xl pb-4 text-center">
+                    Cart
+                  </h1>
+                ) : (
+                  <h1 className="text-draculaRed text-3xl py-1 text-center">
+                    Cart is empty
+                  </h1>
+                )}
                 <ul className="list-decimal list-inside">
-                {shownBooks.map((book) => (
-                    <li key={book.isbn}>{`${book.title} - (${book.isbn}) x${book.purchase_quantity} @ $${book.msrp.toFixed(2)}`}</li>
-                ))}
+                  {shownBooks.map((book) => (
+                    <li key={book.isbn}>{`${book.title} - (${book.isbn}) x${
+                      book.purchase_quantity
+                    } @ $${book.msrp.toFixed(2)}`}</li>
+                  ))}
                 </ul>
-                <hr className="my-4 rounded border-draculaGreen border-2"/>
-                <div>Total Price: ${shownBooks.reduce((acc, book) => acc + book.msrp * book.purchase_quantity, 0).toFixed(2)}</div>
-                <div>Total Number of Books: {shownBooks.reduce((acc, book) => acc + book.purchase_quantity, 0)}</div>
+                <hr className="my-4 rounded border-draculaGreen border-2" />
+                <div>
+                  Total Price: $
+                  {shownBooks
+                    .reduce(
+                      (acc, book) => acc + book.msrp * book.purchase_quantity,
+                      0
+                    )
+                    .toFixed(2)}
+                </div>
+                <div>
+                  Total Number of Books:{" "}
+                  {shownBooks.reduce(
+                    (acc, book) => acc + book.purchase_quantity,
+                    0
+                  )}
+                </div>
                 <div className="mt-4 flex justify-center">
-                    <button
-                      type="submit"
-                      className="saveButton"
-                      onClick={() =>
-                        {}
-                      }
-                      disabled={loading}
-                    >
-                      Place Order
-                    </button>
-                  </div>
+                  <button
+                    type="submit"
+                    className="saveButton"
+                    onClick={() => {}}
+                    disabled={loading || shownBooks.length <= 0}
+                  >
+                    Place Order
+                  </button>
+                </div>
               </div>
             </div>
           </div>
