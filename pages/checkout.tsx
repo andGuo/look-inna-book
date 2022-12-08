@@ -156,27 +156,29 @@ const Home = () => {
       if (!user) throw new Error("No user");
 
       const newOrder = {
-        shipFname,
-        shipLname,
-        shipAddr,
-        shipAptSuite,
-        shipCountry,
-        shipCity,
-        shipState,
-        shipZipCode,
-        shipPhoneNum,
-        billFname,
-        billLname,
-        billAddr,
-        billAptSuite,
-        billCountry,
-        billCity,
-        billState,
-        billZipCode,
+        shipfname: shipFname,
+        shiplname: shipLname,
+        shipaddr: shipAddr,
+        shipaptsuite: shipAptSuite,
+        shipcountry: shipCountry,
+        shipcity: shipCity,
+        shipstate: shipState,
+        shipzipcode: shipZipCode,
+        shipphonenum: shipPhoneNum,
+        billfname: billFname,
+        billlname: billLname,
+        billaddr: billAddr,
+        billaptsuite: billAptSuite,
+        billcountry: billCountry,
+        billcity: billCity,
+        billstate: billState,
+        billzipcode: billZipCode,
+        uid : user.id,
       };
 
       let { data, error } = await supabase.rpc("place_order", newOrder);
 
+      if (error) throw error;
       alert("Success, order placed!");
     } catch (error) {
       alert("Error unable to place order!");
@@ -492,7 +494,27 @@ const Home = () => {
                   <button
                     type="submit"
                     className="saveButton"
-                    onClick={() => {}}
+                    onClick={() => {
+                      place_order({
+                        shipFname,
+                        shipLname,
+                        shipAddr,
+                        shipAptSuite,
+                        shipCountry,
+                        shipCity,
+                        shipState,
+                        shipZipCode,
+                        shipPhoneNum,
+                        billFname,
+                        billLname,
+                        billAddr,
+                        billAptSuite,
+                        billCountry,
+                        billCity,
+                        billState,
+                        billZipCode,
+                      })
+                    }}
                     disabled={loading || shownBooks.length <= 0}
                   >
                     Place Order
