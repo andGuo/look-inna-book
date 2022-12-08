@@ -44,6 +44,11 @@ const Home = () => {
     getCartItems();
   }, [session]);
 
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
   // Sets default billing and shipping to user profile adderess
   async function getProfileAddr() {
     try {
@@ -107,6 +112,75 @@ const Home = () => {
       if (data) setShownBooks(data);
     } catch (error) {
       console.debug(error);
+    }
+  }
+
+  async function place_order({
+    shipFname,
+    shipLname,
+    shipAddr,
+    shipAptSuite,
+    shipCountry,
+    shipCity,
+    shipState,
+    shipZipCode,
+    shipPhoneNum,
+    billFname,
+    billLname,
+    billAddr,
+    billAptSuite,
+    billCountry,
+    billCity,
+    billState,
+    billZipCode,
+  }: {
+    shipFname: ShipAddress["first_name"];
+    shipLname: ShipAddress["last_name"];
+    shipAddr: ShipAddress["address"];
+    shipAptSuite: ShipAddress["apartment_suite"];
+    shipCountry: ShipAddress["country"];
+    shipCity: ShipAddress["city"];
+    shipState: ShipAddress["state"];
+    shipZipCode: ShipAddress["zip_code"];
+    shipPhoneNum: ShipAddress["phone_number"];
+    billFname: BillAddress["first_name"];
+    billLname: BillAddress["last_name"];
+    billAddr: BillAddress["address"];
+    billAptSuite: BillAddress["apartment_suite"];
+    billCountry: BillAddress["country"];
+    billCity: BillAddress["city"];
+    billState: BillAddress["state"];
+    billZipCode: BillAddress["zip_code"];
+  }) {
+    try {
+      if (!user) throw new Error("No user");
+
+      const newOrder = {
+        shipFname,
+        shipLname,
+        shipAddr,
+        shipAptSuite,
+        shipCountry,
+        shipCity,
+        shipState,
+        shipZipCode,
+        shipPhoneNum,
+        billFname,
+        billLname,
+        billAddr,
+        billAptSuite,
+        billCountry,
+        billCity,
+        billState,
+        billZipCode,
+      };
+
+      let { data, error } = await supabase.rpc("place_order", newOrder);
+
+      alert("Success, order placed!");
+    } catch (error) {
+      alert("Error unable to place order!");
+      console.log(error);
     }
   }
 
@@ -377,7 +451,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-neutral-800 px-6 pt-4 pb-6 rounded-2xl shadow-xl">
+            <div className="bg-neutral-800 px-5 pt-4 pb-6 rounded-2xl shadow-xl">
               <div className="text-darkText text-lg">
                 {shownBooks.length > 0 ? (
                   <h1 className="text-draculaPink text-3xl pb-4 text-center">
@@ -392,18 +466,20 @@ const Home = () => {
                   {shownBooks.map((book) => (
                     <li key={book.isbn}>{`${book.title} - (${book.isbn}) x${
                       book.purchase_quantity
-                    } @ $${book.msrp.toFixed(2)}`}</li>
+                    } @ ${formatter.format(book.msrp.toFixed(2))}`}</li>
                   ))}
                 </ul>
                 <hr className="my-4 rounded border-draculaGreen border-2" />
                 <div>
-                  Total Price: $
-                  {shownBooks
-                    .reduce(
-                      (acc, book) => acc + book.msrp * book.purchase_quantity,
-                      0
-                    )
-                    .toFixed(2)}
+                  Total Price:{" "}
+                  {formatter.format(
+                    shownBooks
+                      .reduce(
+                        (acc, book) => acc + book.msrp * book.purchase_quantity,
+                        0
+                      )
+                      .toFixed(2)
+                  )}
                 </div>
                 <div>
                   Total Number of Books:{" "}
