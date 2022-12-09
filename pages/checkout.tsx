@@ -155,6 +155,24 @@ const Home = () => {
     try {
       if (!user) throw new Error("No user");
 
+      if (
+       !shipFname ||
+       !shipLname ||
+       !shipAddr ||
+       !shipCountry ||
+       !shipCity ||
+       !shipState ||
+       !shipZipCode ||
+       !shipPhoneNum ||
+       !billFname ||
+       !billLname ||
+       !billAddr ||
+       !billCountry ||
+       !billCity ||
+       !billState ||
+       !billZipCode
+      ) throw new Error("Empty fields!");
+
       const newOrder = {
         shipfname: shipFname,
         shiplname: shipLname,
