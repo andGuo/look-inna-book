@@ -7,10 +7,11 @@ import {
 import { Database } from "../../../utils/database.types";
 import Layout from "../../../components/Layout";
 type Publishers = Database["public"]["Tables"]["publishers"]["Row"];
-type PaymentInfo = Database["public"]["Tables"]["payment_info"]["Row"];
+type PaymentInfo = Database["public"]["Tables"]["publisher_payment"]["Row"];
 type PublisherAddress =
   Database["public"]["Tables"]["publisher_address"]["Row"];
 type PublisherPhone = Database["public"]["Tables"]["publisher_phones"]["Row"];
+import { NumericFormat } from "react-number-format";
 
 export default function AddPublisher() {
   const supabase = useSupabaseClient<Database>();
@@ -273,42 +274,48 @@ export default function AddPublisher() {
                 <div>
                   <label htmlFor="transit" className="block mb-6">
                     <span className="text-darkText">Transit Number:</span>
-                    <input
+                    <NumericFormat
+                      allowNegative={false}
                       id="transit"
-                      type="number"
                       value={transit || ""}
-                      onChange={(e) => setTransit(Number(e.target.value))}
-                      onInput={inputNumMax}
-                      maxLength={5}
+                      onValueChange={(v) => {
+                        setTransit(Number(v.value));
+                      }}
                       className="inputField"
+                      decimalScale={0}
+                      maxLength={5}
                     />
                   </label>
                 </div>
                 <div>
                   <label htmlFor="institution" className="block mb-6">
                     <span className="text-darkText">Institution Number:</span>
-                    <input
+                    <NumericFormat
+                      allowNegative={false}
                       id="institution"
-                      type="number"
                       value={institution || ""}
-                      onChange={(e) => setInstitution(Number(e.target.value))}
-                      onInput={inputNumMax}
-                      maxLength={3}
+                      onValueChange={(v) => {
+                        setInstitution(Number(v.value));
+                      }}
                       className="inputField"
+                      decimalScale={0}
+                      maxLength={3}
                     />
                   </label>
                 </div>
                 <div>
                   <label htmlFor="account" className="block mb-6">
                     <span className="text-darkText">Account Number:</span>
-                    <input
+                    <NumericFormat
+                      allowNegative={false}
                       id="account"
-                      type="number"
                       value={account || ""}
-                      onChange={(e) => setAccount(Number(e.target.value))}
-                      onInput={inputNumMax}
-                      maxLength={12}
+                      onValueChange={(v) => {
+                        setAccount(Number(v.value));
+                      }}
                       className="inputField"
+                      decimalScale={0}
+                      maxLength={12}
                     />
                   </label>
                 </div>

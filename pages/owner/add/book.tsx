@@ -39,13 +39,7 @@ export default function AddPublisher() {
 
   useEffect(() => {
     getBookData();
-  }, []);
-
-  const inputNumMax = (e: any) => {
-    if (e.target.value.length > e.target.maxLength) {
-      e.target.value = e.target.value.slice(0, e.target.maxLength);
-    }
-  };
+  }, []); 
 
   async function getPublishers() {
     try {
