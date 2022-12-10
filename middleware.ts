@@ -12,14 +12,6 @@ export async function middleware(req: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession();
 
-  // Not authenticated
-  if (!session) {
-    const redirectUrl = req.nextUrl.clone();
-    redirectUrl.pathname = "/user";
-    redirectUrl.searchParams.set(`redirectedFrom`, req.nextUrl.pathname);
-    return NextResponse.redirect(redirectUrl);
-  }
-
   if (session) {
     let { data, error, status } = await supabase.rpc(
       "is_owner",
