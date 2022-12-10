@@ -495,6 +495,10 @@ export interface Database {
         }
         Returns: undefined
       }
+      generate_report: {
+        Args: Record<PropertyKey, never>
+        Returns: { total_sales: number; total_expenses: number }[]
+      }
       get_profile_cart: {
         Args: { uid: string }
         Returns: {

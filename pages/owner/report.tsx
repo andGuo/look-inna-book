@@ -18,7 +18,7 @@ export default function Report() {
   const user = useUser();
   const [totalSales, setTotalSales] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
-  const [customSales, setCustomSales] = useState(0);
+  const [customSales, setCustomSales] = useState(-1);
   const [selectGenres, setSelectGenres] = useState<Genre["name"][]>([]);
   const [selectAuthors, setSelectAuthors] = useState<Author["author_id"][]>([]);
   const [genres, setGenres] = useState<Genre[]>([]);
@@ -95,9 +95,12 @@ export default function Report() {
     }
   }
 
-  async function getGenreAuthorSales() {
+  async function getAuthorGenreSales() {
     try {
-      let { data, error, status } = await supabase.rpc("get_genre_sales", {});
+      let { data, error, status } = await supabase.rpc(
+        "get_author_genre_sales",
+        {}
+      );
 
       if (error && status !== 406) {
         throw error;
@@ -112,6 +115,11 @@ export default function Report() {
     }
   }
 
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+    
   return (
     <Layout title="Report | Look-Inna-Book">
       <div className="flex flex-wrap flex-col items-center justify-around sm:my-14 sm:flex-row sm:items-start sm:justify-center">
@@ -121,6 +129,20 @@ export default function Report() {
               <h1 className="text-draculaPink text-3xl pb-4 text-center">
                 Owner Report
               </h1>
+              <div className="text-darkText flex flex-col pb-4 text-xl">
+                <div>
+                  <span className="text-draculaYellow">Total Sales:</span>
+                  <span> {formatter.format(totalSales.toFixed(2)) || "Unavailable"} </span>
+                </div>
+                <div>
+                  <span className="text-draculaYellow">Total Expenditures:</span>
+                  <span> {formatter.format(totalExpense.toFixed(2)) || "Unavailable"} </span>
+                </div>
+                <div>
+                  <span className="text-draculaYellow">Author/Genre Sales:</span>
+                  <span> {customSales >= 0 && formatter.format(customSales.toFixed(2)) || "Unavailable"} </span>
+                </div>
+              </div>
               <div>
                 <label className="block mb-6">
                   <span className="text-darkText">Authors:</span>
