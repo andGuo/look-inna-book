@@ -48,7 +48,7 @@ export default function Profile({ session }: { session: Session }) {
       if (data) {
         setFname(data.first_name);
         setLname(data.last_name);
-        if (data.user_address) {
+        if (data.user_address.length > 0) {
           const arr = data.user_address;
           setAddr(arr[0].address);
           setAptSuite(arr[0].apartment_suite);
