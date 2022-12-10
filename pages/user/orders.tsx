@@ -17,15 +17,15 @@ export default function AddPublisher() {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [orderId, setOrderId] = useState<Tracking["order_id"]>(0);
-  const [shipStatus, setShipStatus] = useState<Tracking["shipping_status"]>("");
-  const [creatDate, setCreatDate] = useState<Tracking["creation_date"]>("");
+  const [shipStatus, setShipStatus] = useState<Tracking["shipping_status"]>(" ");
+  const [creatDate, setCreatDate] = useState<Tracking["creation_date"]>(" ");
   const [deliveryDate, setDeliveryDate] =
-    useState<Tracking["delivery_date"]>("");
+    useState<Tracking["delivery_date"]>(" ");
   const [deliveredDate, setDelivered] =
-    useState<Tracking["delivered_date"]>("");
-  const [city, setCity] = useState<Tracking["city"]>("");
-  const [state, setState] = useState<Tracking["state"]>("");
-  const [country, setCountry] = useState<Tracking["country"]>("");
+    useState<Tracking["delivered_date"]>(" ");
+  const [city, setCity] = useState<Tracking["city"]>(" ");
+  const [state, setState] = useState<Tracking["state"]>(" ");
+  const [country, setCountry] = useState<Tracking["country"]>(" ");
 
   async function getBookData({
     order_number,
@@ -41,20 +41,20 @@ export default function AddPublisher() {
 
       if (data) {
         console.log(data);
-        setShipStatus(data.shipping_status);
-        setCreatDate(data.creation_date);
-        setDeliveryDate(data.delivery_date);
-        setDelivered(data.delivered_date);
-        setCity(data.city);
-        setState(data.state);
-        setCountry(data.coutry);
+        setShipStatus(data[0].shipping_status);
+        setCreatDate(data[0].creation_date);
+        setDeliveryDate(data[0].delivery_date);
+        setDelivered(data[0].delivered_date);
+        setCity(data[0].city);
+        setState(data[0].state);
+        setCountry(data[0].country);
       }
 
       if (error) throw error;
       alert("Success, order found!");
     } catch (error) {
       alert(
-        "Error unable to find order or you do not have permission to view that order!"
+        "Error, unable to find order or you do not have permission to view that order!"
       );
       console.log(error);
     }
@@ -83,7 +83,7 @@ export default function AddPublisher() {
             </div>
           </div>
         ) : (
-          <div className="p-2 m-4 lg:w-2/5 sm:w-1/2">
+          <div className="p-2 m-4 mt-10 lg:w-2/5 sm:w-1/2">
             <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
               <div className="form-widget">
                 <h1 className="text-draculaPink text-3xl pb-4 text-center">
@@ -117,6 +117,41 @@ export default function AddPublisher() {
                       Track Order
                     </button>
                   </div>
+                </div>
+              </div>
+              <hr className="my-4 rounded border-draculaGreen border-2" />
+              <div className="text-darkText flex flex-col pb-4">
+                <div>
+                  <span className="text-draculaYellow">Shipping Status:</span>
+                  <span> {shipStatus || "Unavailable"} </span>
+                </div>
+                <div>
+                  <span className="text-draculaYellow">Order Placed Date:</span>
+                  <span> {creatDate || "Unavailable"} </span>
+                </div>
+                <div>
+                  <span className="text-draculaYellow">
+                    Expected Delivery Date:
+                  </span>
+                  <span> {deliveryDate || "Unavailable"} </span>
+                </div>
+                <div>
+                  <span className="text-draculaYellow">
+                    Actual Delivery Date:
+                  </span>
+                  <span> {deliveredDate || "Unavailable"} </span>
+                </div>
+                <div>
+                  <span className="text-draculaYellow">City:</span>
+                  <span> {city || "Unavailable"} </span>
+                </div>
+                <div>
+                  <span className="text-draculaYellow">State:</span>
+                  <span> {state || "Unavailable"} </span>
+                </div>
+                <div>
+                  <span className="text-draculaYellow">Country:</span>
+                  <span> {country || "Unavailable"} </span>
                 </div>
               </div>
             </div>
