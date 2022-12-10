@@ -11,6 +11,7 @@ import { Database } from "../utils/database.types";
 type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
 type BillAddress = Database["public"]["Tables"]["billing_address"]["Row"];
 type ShipAddress = Database["public"]["Tables"]["shipping_address"]["Row"];
+import Router from "next/router"
 
 const Home = () => {
   const session = useSession();
@@ -198,6 +199,7 @@ const Home = () => {
 
       if (error) throw error;
       alert("Success, order placed!");
+      Router.reload();
     } catch (error) {
       alert("Error unable to place order!");
       console.log(error);
