@@ -35,7 +35,7 @@ const NavBar = () => {
             <Link href="/user/orders">Orders</Link>
           </li>
           <li className="navBtn">
-            <Link href="/owner">Owner Page</Link>
+            <a href="/owner">Owner Page</a>
           </li>
           <li className="navBtn flex">
             <svg
