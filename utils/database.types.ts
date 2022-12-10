@@ -97,65 +97,48 @@ export interface Database {
           isbn: string
           title: string
           msrp: number
+          instock_quantity: number
           num_pages: number
           pub_percentage: number
           img_url: string | null
           publisher_id: string
-          instock_quantity: number | null
         }
         Insert: {
           isbn: string
           title: string
           msrp: number
+          instock_quantity?: number
           num_pages: number
           pub_percentage: number
           img_url?: string | null
           publisher_id: string
-          instock_quantity?: number | null
         }
         Update: {
           isbn?: string
           title?: string
           msrp?: number
+          instock_quantity?: number
           num_pages?: number
           pub_percentage?: number
           img_url?: string | null
           publisher_id?: string
-          instock_quantity?: number | null
         }
       }
       cart_books: {
         Row: {
-          cart_id: string
+          profile_id: string
           isbn: string
           quantity: number
         }
         Insert: {
-          cart_id: string
+          profile_id: string
           isbn: string
           quantity: number
-        }
-        Update: {
-          cart_id?: string
-          isbn?: string
-          quantity?: number
-        }
-      }
-      carts: {
-        Row: {
-          profile_id: string
-          cart_total: number
-          total_quantity: number
-        }
-        Insert: {
-          profile_id: string
-          cart_total: number
-          total_quantity: number
         }
         Update: {
           profile_id?: string
-          cart_total?: number
-          total_quantity?: number
+          isbn?: string
+          quantity?: number
         }
       }
       genres: {
@@ -173,17 +156,29 @@ export interface Database {
         Row: {
           order_id: number
           isbn: string
+          title: string
+          price: number
           quantity: number
+          pub_percentage: number
+          publisher_id: string
         }
         Insert: {
           order_id: number
           isbn: string
+          title: string
+          price: number
           quantity: number
+          pub_percentage: number
+          publisher_id: string
         }
         Update: {
           order_id?: number
           isbn?: string
+          title?: string
+          price?: number
           quantity?: number
+          pub_percentage?: number
+          publisher_id?: string
         }
       }
       orders: {
@@ -197,7 +192,7 @@ export interface Database {
         Insert: {
           order_id?: number
           profile_id: string
-          order_date: string
+          order_date?: string
           order_total: number
           total_quantity: number
         }
@@ -375,6 +370,38 @@ export interface Database {
           phone_number?: string
         }
       }
+      tracking_info: {
+        Row: {
+          order_id: number
+          shipping_status: string
+          creation_date: string
+          delivery_date: string | null
+          delivered_date: string | null
+          city: string | null
+          state: string | null
+          country: string | null
+        }
+        Insert: {
+          order_id: number
+          shipping_status?: string
+          creation_date?: string
+          delivery_date?: string | null
+          delivered_date?: string | null
+          city?: string | null
+          state?: string | null
+          country?: string | null
+        }
+        Update: {
+          order_id?: number
+          shipping_status?: string
+          creation_date?: string
+          delivery_date?: string | null
+          delivered_date?: string | null
+          city?: string | null
+          state?: string | null
+          country?: string | null
+        }
+      }
       user_address: {
         Row: {
           profile_id: string
@@ -409,9 +436,23 @@ export interface Database {
       }
     }
     Views: {
-      [_ in never]: never
+      carts: {
+        Row: {
+          profile_id: string | null
+          cart_total: number | null
+          total_quantity: number | null
+        }
+      }
     }
     Functions: {
+      add_to_cart: {
+        Args: { isbn_: string; quantity: number; pid: string }
+        Returns: undefined
+      }
+      buy_book: {
+        Args: { uid: string; isbn_: string }
+        Returns: undefined
+      }
       create_author: {
         Args: {
           first_name: string
@@ -454,9 +495,67 @@ export interface Database {
         }
         Returns: undefined
       }
+      get_profile_cart: {
+        Args: { uid: string }
+        Returns: {
+          isbn: string
+          purchase_quantity: number
+          title: string
+          msrp: number
+          instock_quantity: number
+          img_url: string
+        }[]
+      }
+      get_profile_order: {
+        Args: { order_number: number }
+        Returns: {
+          shipping_status: string
+          creation_date: string
+          delivery_date: string
+          delivered_date: string
+          city: string
+          state: string
+          country: string
+        }[]
+      }
       is_owner: {
         Args: { pid: string }
         Returns: boolean
+      }
+      place_order: {
+        Args: {
+          shipfname: string
+          shiplname: string
+          shipaddr: string
+          shipcountry: string
+          shipcity: string
+          shipstate: string
+          shipzipcode: string
+          shipphonenum: string
+          billfname: string
+          billlname: string
+          billaddr: string
+          billcountry: string
+          billcity: string
+          billstate: string
+          billzipcode: string
+          uid: string
+          shipaptsuite: string
+          billaptsuite: string
+        }
+        Returns: undefined
+      }
+      remove_book: {
+        Args: { isbn_: string }
+        Returns: {
+          isbn: string
+          title: string
+          msrp: number
+          instock_quantity: number
+          num_pages: number
+          img_url: string
+          publisher_id: string
+        }[]
       }
     }
     Enums: {
