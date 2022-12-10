@@ -95,11 +95,17 @@ export default function Report() {
     }
   }
 
-  async function getAuthorGenreSales() {
+  async function getAuthorGenreSales({
+    authors,
+    genres,
+  }: {
+    authors: Author["author_id"][];
+    genres: Genre["name"][];
+  }) {
     try {
       let { data, error, status } = await supabase.rpc(
         "get_author_genre_sales",
-        {}
+        { authors, genres }
       );
 
       if (error && status !== 406) {
@@ -119,7 +125,7 @@ export default function Report() {
     style: "currency",
     currency: "USD",
   });
-    
+
   return (
     <Layout title="Report | Look-Inna-Book">
       <div className="flex flex-wrap flex-col items-center justify-around sm:my-14 sm:flex-row sm:items-start sm:justify-center">
@@ -132,15 +138,32 @@ export default function Report() {
               <div className="text-darkText flex flex-col pb-4 text-xl">
                 <div>
                   <span className="text-draculaYellow">Total Sales:</span>
-                  <span> {formatter.format(totalSales.toFixed(2)) || "Unavailable"} </span>
+                  <span>
+                    {" "}
+                    {formatter.format(totalSales.toFixed(2)) ||
+                      "Unavailable"}{" "}
+                  </span>
                 </div>
                 <div>
-                  <span className="text-draculaYellow">Total Expenditures:</span>
-                  <span> {formatter.format(totalExpense.toFixed(2)) || "Unavailable"} </span>
+                  <span className="text-draculaYellow">
+                    Total Expenditures:
+                  </span>
+                  <span>
+                    {" "}
+                    {formatter.format(totalExpense.toFixed(2)) ||
+                      "Unavailable"}{" "}
+                  </span>
                 </div>
                 <div>
-                  <span className="text-draculaYellow">Author/Genre Sales:</span>
-                  <span> {customSales >= 0 && formatter.format(customSales.toFixed(2)) || "Unavailable"} </span>
+                  <span className="text-draculaYellow">
+                    Author/Genre Sales:
+                  </span>
+                  <span>
+                    {" "}
+                    {(customSales >= 0 &&
+                      formatter.format(customSales.toFixed(2))) ||
+                      "Unavailable"}{" "}
+                  </span>
                 </div>
               </div>
               <div>
