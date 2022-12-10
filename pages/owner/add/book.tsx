@@ -35,7 +35,6 @@ export default function AddPublisher() {
   const [publishers, setPublishers] = useState<Publisher[]>([]);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [authors, setAuthors] = useState<Author[]>([]);
-  const [uuid, setUuid] = useState(uuidv4());
 
   useEffect(() => {
     getBookData();
