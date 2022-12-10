@@ -103,8 +103,10 @@ export default function Report() {
     genres: Genre["name"][];
   }) {
     try {
+      if (authors.length <=0 && genres.length <= 0) throw new Error("Enter author(s) and genres(s)!");
+
       let { data, error, status } = await supabase.rpc(
-        "get_author_genre_sales",
+        "gen_author_genre_sales",
         { authors, genres }
       );
 
@@ -112,9 +114,7 @@ export default function Report() {
         throw error;
       }
 
-      if (data) {
-        setCustomSales(data);
-      }
+      setCustomSales(data || 0);
     } catch (error) {
       alert("Error getting author/genre sales!");
       console.log(error);
@@ -199,7 +199,13 @@ export default function Report() {
                 </label>
               </div>
               <div className="mb-6 flex justify-center">
-                <button type="submit" className="saveButton" onClick={() => {}}>
+                <button type="submit" className="saveButton" onClick={() => {
+                  getAuthorGenreSales({
+                    authors: selectAuthors,
+                    genres: selectGenres,
+                  })
+                }}
+                disabled = {selectAuthors.length <= 0 && selectGenres.length <= 0}>
                   Show Sales
                 </button>
               </div>

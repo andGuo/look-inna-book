@@ -495,6 +495,10 @@ export interface Database {
         }
         Returns: undefined
       }
+      gen_author_genre_sales: {
+        Args: { authors: string[]; genres: string[] }
+        Returns: number
+      }
       generate_report: {
         Args: Record<PropertyKey, never>
         Returns: { total_sales: number; total_expenses: number }[]
