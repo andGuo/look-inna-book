@@ -1,13 +1,11 @@
 import * as React from "react";
 import Link from "next/link";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useRouter } from 'next/navigation'
 
 const NavBar = () => {
   const [openNavMenu, setNavMenuOpen] = React.useState(false);
   const session = useSession();
   const supabase = useSupabaseClient();
-  const router = useRouter();
 
   return (
     <nav className="flex flex-wrap items-center justify-between content-end pt-5">
@@ -24,7 +22,7 @@ const NavBar = () => {
             ) : (
               <button
                 className="button block"
-                onClick={() => {supabase.auth.signOut(); router.refresh();}}
+                onClick={() => supabase.auth.signOut()}
               >
                 Sign Out
               </button>
