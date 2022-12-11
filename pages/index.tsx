@@ -47,17 +47,26 @@ const Home = ({ books }: { books: Book[] }) => {
 
   async function searchForBooks(searchQuery: string) {
     try {
-      if (!searchQuery) throw new Error("No input search query");
+      if (searchQuery.trim()) {
+        const { data, error } = await supabase
+          .from("books")
+          .select(
+            "isbn, title, msrp, num_pages, img_url, publisher_id, instock_quantity"
+          )
+          .textSearch("title", searchQuery);
 
-      const { data, error } = await supabase
-        .from("books")
-        .select(
-          "isbn, title, msrp, num_pages, img_url, publisher_id, instock_quantity"
-        )
-        .textSearch("title", searchQuery);
+        if (error) throw error;
+        if (data) setShownBooks(data);
+      } else {
+        const { data, error } = await supabase
+          .from("books")
+          .select(
+            "isbn, title, msrp, num_pages, img_url, publisher_id, instock_quantity"
+          );
 
-      if (error) throw error;
-      if (data) setShownBooks(data);
+        if (error) throw error;
+        if (data) setShownBooks(data);
+      }
     } catch (error) {
       console.debug(error);
     }
@@ -74,7 +83,7 @@ const Home = ({ books }: { books: Book[] }) => {
           )}
         </div>
         <div className="mt-4">
-          <form className="flex items-center">
+          <form className="flex items-center" onSubmit={e => { e.preventDefault(); searchForBooks(searchQuery);}}>
             <label htmlFor="simple-search" className="sr-only">
               Search
             </label>
@@ -101,11 +110,10 @@ const Home = ({ books }: { books: Book[] }) => {
                 placeholder="Search"
                 value={searchQuery || ""}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                required
               />
             </div>
             <button
-              type="submit"
+              type="button"
               className="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               onClick={() => searchForBooks(searchQuery)}
             >
