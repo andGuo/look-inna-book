@@ -103,20 +103,16 @@ const NavBar = () => {
       {openNavMenu && (
         <div className="sm:hidden basis-full bg-lightPrimar mt-6 mb-4">
           <ul className="flex text-xl flex-col items-center justify-evenly">
-
-          <li className="navBtn py-4 text-darkText font-bold">
-            {!session ? (
-              <Link href="/user">Log In</Link>
-            ) : (
-              <button
-    
-                onClick={() => supabase.auth.signOut()}
-              >
-                Sign Out
-              </button>
-            )}
+            <li className="navBtn py-4 text-darkText font-bold">
+              {!session ? (
+                <Link href="/user">Log In</Link>
+              ) : (
+                <button onClick={() => supabase.auth.signOut()}>
+                  Sign Out
+                </button>
+              )}
             </li>
-            
+
             <Link
               href="/user"
               className="border border-solid border-black w-full"
@@ -141,7 +137,9 @@ const NavBar = () => {
               href="/owner"
               className="border border-solid border-black w-full"
             >
-              <li className="navBtn py-4 text-darkText font-bold">Owner Page</li>
+              <li className="navBtn py-4 text-darkText font-bold">
+                Owner Page
+              </li>
             </Link>
           </ul>
         </div>
