@@ -9,7 +9,7 @@ const NavBar = () => {
 
   return (
     <nav className="flex flex-wrap items-center justify-between content-end pt-5">
-      <div className="flex items-center logo h-12 px-6 py-3 text-5xl font-bold">
+      <div className="flex items-center logo h-12 px-6 py-3 sm:text-5xl text-3xl font-bold">
         <Link className="text-draculaGreen hover:text-draculaCyan" href="/">
           Look-Inna-Book
         </Link>
@@ -112,7 +112,6 @@ const NavBar = () => {
                 </button>
               )}
             </li>
-
             <Link
               href="/user"
               className="border border-solid border-black w-full"
@@ -120,19 +119,11 @@ const NavBar = () => {
               <li className="navBtn py-4 text-darkText font-bold">Profile</li>
             </Link>
             <Link
-              href="/checkout"
-              className="border border-solid border-black w-full"
-            >
-              <li className="navBtn py-4 text-darkText font-bold">Cart</li>
-            </Link>
-
-            <Link
               href="/user/orders"
               className="border border-solid border-black w-full"
             >
-              <li className="navBtn py-4 text-darkText font-bold">Order</li>
+              <li className="navBtn py-4 text-darkText font-bold">Orders</li>
             </Link>
-
             <Link
               href="/owner"
               className="border border-solid border-black w-full"
@@ -140,6 +131,12 @@ const NavBar = () => {
               <li className="navBtn py-4 text-darkText font-bold">
                 Owner Page
               </li>
+            </Link>
+            <Link
+              href="/checkout"
+              className="border border-solid border-black w-full"
+            >
+              <li className="navBtn py-4 text-darkText font-bold">Cart</li>
             </Link>
           </ul>
         </div>
