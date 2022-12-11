@@ -41,7 +41,25 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 };
 
 const Home = ({ books }: { books: Book[] }) => {
+  const supabase = useSupabaseClient();
   const [shownBooks, setShownBooks] = useState(books);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  async function searchForBooks(searchQuery: string) {
+    try {
+      if (!searchQuery) throw new Error("No input search query");
+
+      const { data, error } = await supabase
+        .from("books")
+        .select("isbn, title, msrp, num_pages, img_url, publisher_id, instock_quantity")
+        .textSearch("title", searchQuery);
+
+      if (error) throw error;
+      if (data) setShownBooks(data);
+    } catch (error) {
+      console.debug(error);
+    }
+  }
 
   return (
     <Layout title={"Home | Look-Inna-Book"}>
