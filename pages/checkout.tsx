@@ -11,7 +11,9 @@ import { Database } from "../utils/database.types";
 type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
 type BillAddress = Database["public"]["Tables"]["billing_address"]["Row"];
 type ShipAddress = Database["public"]["Tables"]["shipping_address"]["Row"];
-import Router from "next/router"
+import Router from "next/router";
+import Link from "next/link";
+import { stringify } from "querystring";
 
 const Home = () => {
   const session = useSession();
@@ -116,6 +118,24 @@ const Home = () => {
     }
   }
 
+  async function removeFromCart({ isbn }: { isbn: string }) {
+    try {
+      if (!user) throw new Error("No user");
+
+      const { error } = await supabase
+        .from("cart_books")
+        .delete()
+        .match({ isbn: isbn, profile_id: user.id });
+
+      if (error) throw error;
+      alert("Book removed!");
+      await getCartItems();
+    } catch (error) {
+      alert("Error! Unable to remove book(s) at this time.");
+      console.debug(error);
+    }
+  }
+
   async function place_order({
     shipFname,
     shipLname,
@@ -157,22 +177,23 @@ const Home = () => {
       if (!user) throw new Error("No user");
 
       if (
-       !shipFname ||
-       !shipLname ||
-       !shipAddr ||
-       !shipCountry ||
-       !shipCity ||
-       !shipState ||
-       !shipZipCode ||
-       !shipPhoneNum ||
-       !billFname ||
-       !billLname ||
-       !billAddr ||
-       !billCountry ||
-       !billCity ||
-       !billState ||
-       !billZipCode
-      ) throw new Error("Empty fields!");
+        !shipFname ||
+        !shipLname ||
+        !shipAddr ||
+        !shipCountry ||
+        !shipCity ||
+        !shipState ||
+        !shipZipCode ||
+        !shipPhoneNum ||
+        !billFname ||
+        !billLname ||
+        !billAddr ||
+        !billCountry ||
+        !billCity ||
+        !billState ||
+        !billZipCode
+      )
+        throw new Error("Empty fields!");
 
       const newOrder = {
         shipfname: shipFname,
@@ -192,7 +213,7 @@ const Home = () => {
         billcity: billCity,
         billstate: billState,
         billzipcode: billZipCode,
-        uid : user.id,
+        uid: user.id,
       };
 
       let { data, error } = await supabase.rpc("place_order", newOrder);
@@ -486,9 +507,23 @@ const Home = () => {
                 )}
                 <ul className="list-decimal list-inside">
                   {shownBooks.map((book) => (
-                    <li key={book.isbn}>{`${book.title} - (${book.isbn}) x${
-                      book.purchase_quantity
-                    } @ ${formatter.format(book.msrp.toFixed(2))}`}</li>
+                    <div key={book.isbn} className="group">
+                      <li className="group-hover:text-draculaCyan">
+                        <Link href={`/books/${book.isbn}`}>
+                          {`${book.title} - (${book.isbn}) x${
+                            book.purchase_quantity
+                          } @ ${formatter.format(book.msrp.toFixed(2))}`}
+                        </Link>
+                        <div>
+                          <button
+                            className="group-hover:text-draculaRed hover:underline text-sm select-none"
+                            onClick={() => removeFromCart({ isbn: book.isbn })}
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </li>
+                    </div>
                   ))}
                 </ul>
                 <hr className="my-4 rounded border-draculaGreen border-2" />
@@ -533,7 +568,7 @@ const Home = () => {
                         billCity,
                         billState,
                         billZipCode,
-                      })
+                      });
                     }}
                     disabled={loading || shownBooks.length <= 0}
                   >
