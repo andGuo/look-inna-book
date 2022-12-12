@@ -19,7 +19,7 @@ A full stack web application made using [Next.js](https://nextjs.org/) and [Supa
 
 ## Bonus Features
 - Account Persistent User Cart
-    - Remove items from Carts
+    - Can also remove items from checkout page
 - User Auth
     - Magic email links using JWT auth tokens
 - Serverless and Persistent Front-end and Back-end Infrastructure
