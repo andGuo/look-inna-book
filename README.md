@@ -24,3 +24,4 @@ A full stack web application made using [Next.js](https://nextjs.org/) and [Supa
     - Magic email links using JWT auth tokens
 - Serverless and Persistent Front-end and Back-end Infrastructure
 - Full Text Search for Book Titles
+- Automatic book restock trigger (if the inventory of the book reaches <10, the number of that book sold in the previous month is reordered)
