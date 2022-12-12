@@ -1,5 +1,8 @@
 # Look-Inna-Book COMP 3005 F2022
 
+## Description
+A full stack web application made using [Next.js](https://nextjs.org/) and [Supabase](https://supabase.com/).
+
 ## Created by:
 - Andrew Guo
 - Amelie Haefele
