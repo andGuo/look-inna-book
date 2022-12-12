@@ -140,7 +140,7 @@ export default function Report() {
                   <span className="text-draculaYellow">Total Sales:</span>
                   <span>
                     {" "}
-                    {formatter.format(totalSales.toFixed(2)) ||
+                    {formatter.format(totalSales?.toFixed(2)) ||
                       "Unavailable"}{" "}
                   </span>
                 </div>
@@ -150,7 +150,7 @@ export default function Report() {
                   </span>
                   <span>
                     {" "}
-                    {formatter.format(totalExpense.toFixed(2)) ||
+                    {formatter.format(totalExpense?.toFixed(2)) ||
                       "Unavailable"}{" "}
                   </span>
                 </div>
@@ -161,7 +161,7 @@ export default function Report() {
                   <span>
                     {" "}
                     {(customSales >= 0 &&
-                      formatter.format(customSales.toFixed(2))) ||
+                      formatter.format(customSales?.toFixed(2))) ||
                       "Unavailable"}{" "}
                   </span>
                 </div>
