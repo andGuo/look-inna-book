@@ -7,15 +7,16 @@ A full stack web application made using [Next.js](https://nextjs.org/) and [Supa
 - Andrew Guo
 - Amelie Haefele
 
-## Hosted at
+#Getting started
+
+## Visit Website Hosted at
 - [Vercel](https://look-inna-book.vercel.app/)
+  - ### Login for Account With Owner Role Enabled
+    - User: 0freer.tall@icloud.com
+    - Pwd: 3005TApassword
 
-## Related SQL
+## View Related SQL
 - [Here](https://github.com/andGuo/look-inna-book-sql)
-
-## Login for Account With Owner Role Enabled
-- User: 0freer.tall@icloud.com
-- Pwd: 3005TApassword
 
 ## Bonus Features
 - Account Persistent User Cart
