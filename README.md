@@ -10,3 +10,6 @@
 ## Related SQL
 - [Here](https://github.com/andGuo/look-inna-book-sql)
 
+Login for Account With Owner Role Enabled:
+User: 0freer.tall@icloud.com
+Pwd: 3005TApassword
