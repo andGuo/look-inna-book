@@ -7,7 +7,7 @@ A full stack web application made using [Next.js](https://nextjs.org/) and [Supa
 - Andrew Guo
 - Amelie Haefele
 
-#Getting started
+# Getting started
 
 ## Visit Website Hosted at
 - [Vercel](https://look-inna-book.vercel.app/)
