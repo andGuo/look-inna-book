@@ -53,7 +53,7 @@ const Home = ({ books }: { books: Book[] }) => {
           .select(
             "isbn, title, msrp, num_pages, img_url, publisher_id, instock_quantity"
           )
-          .textSearch("title", searchQuery);
+          .textSearch("title", searchQuery.trim().replace(/\s+/g," | "));
 
         if (error) throw error;
         if (data) setShownBooks(data);
@@ -68,7 +68,7 @@ const Home = ({ books }: { books: Book[] }) => {
         if (data) setShownBooks(data);
       }
     } catch (error) {
-      console.debug(error);
+      console.log(error);
     }
   }
 
