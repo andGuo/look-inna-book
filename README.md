@@ -1,6 +1,6 @@
 # Look-Inna-Book COMP 3005 F2022
 
-<img src="https://sglmmwjtjabvodozbyni.supabase.co/storage/v1/object/public/screenshots/landing_page.png" width="400" />
+<img src="https://sglmmwjtjabvodozbyni.supabase.co/storage/v1/object/public/screenshots/landing_page.png" width="600" />
 
 ## Description
 A full stack web application made using [Next.js](https://nextjs.org/) and [Supabase](https://supabase.com/).
