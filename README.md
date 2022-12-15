@@ -26,6 +26,7 @@ A full stack web application made using [Next.js](https://nextjs.org/) and [Supa
 - Account Persistent User Cart
     - Can also remove items from checkout page
 - User Auth
+    - Secure account creation with Supabase auth
     - Magic email links using JWT auth tokens
 - Serverless and Persistent Front-end and Back-end Infrastructure
 - Full Text Search for Book Titles
