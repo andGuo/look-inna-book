@@ -11,14 +11,14 @@ A full stack web application made using [Next.js](https://nextjs.org/) and [Supa
 
 # Getting started
 
-## Visit Website Hosted at
-- [Vercel](https://look-inna-book.vercel.app/)
+## Visit Website Hosted at...
+- [Vercel (Click me!)](https://look-inna-book.vercel.app/)
   - ### Login for Account With Owner Role Enabled
     - User: 0freer.tall@icloud.com
     - Pwd: 3005TApassword
 
-## View Related SQL
-- [Here](https://github.com/andGuo/look-inna-book-sql)
+## View Related SQL at...
+- [This github repo (Click me!)](https://github.com/andGuo/look-inna-book-sql)
 
 ## Bonus Features
 - Account Persistent User Cart
