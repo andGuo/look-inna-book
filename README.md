@@ -2,6 +2,8 @@
 
 ## Description
 A full stack web application made using [Next.js](https://nextjs.org/) and [Supabase](https://supabase.com/).
+- https://github.com/vercel/next.js/
+- https://github.com/supabase/supabase
 
 ## Created by:
 - Andrew Guo
