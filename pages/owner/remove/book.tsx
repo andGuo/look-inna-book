@@ -55,7 +55,7 @@ const Home = ({ books }: { books: Book[] }) => {
   }
 
   return (
-    <Layout title={"Home | Look-Inna-Book"}>
+    <Layout title={"Remove Book | Look-Inna-Book"}>
       <div className="flex flex-wrap flex-col items-center justify-center">
         <div className="text-center text-draculaYellow text-4xl my-2">
           {shownBooks.length > 0 ? (

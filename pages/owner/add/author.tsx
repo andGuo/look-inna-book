@@ -49,7 +49,7 @@ export default function AddGenre() {
   }
 
   return (
-    <Layout title="Add Genre | Look-Inna-Book">
+    <Layout title="Add Author | Look-Inna-Book">
       <div className="flex flex-wrap flex-col items-center justify-around sm:my-14 sm:flex-row sm:items-start sm:justify-center">
         <div className="lg:w-2/5 sm:w-1/2">
           <div className="bg-neutral-800 pt-12 px-12 pb-6 rounded-3xl shadow-xl">
