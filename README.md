@@ -7,17 +7,10 @@ A full stack web application made using [Next.js](https://nextjs.org/) and [Supa
 - https://github.com/vercel/next.js/
 - https://github.com/supabase/supabase
 
-## Created by:
-- Andrew Guo
-- Amelie Haefele
-
 # Getting started
 
-## Visit Website Hosted at...
+## Visit Website at
 - [Vercel (Click me!)](https://look-inna-book.vercel.app/)
-  - ### Login for Account With Owner Role Enabled
-    - User: 0freer.tall@icloud.com
-    - Pwd: 3005TApassword
 
 ## View Related SQL at...
 - [This github repo (Click me!)](https://github.com/andGuo/look-inna-book-sql)
