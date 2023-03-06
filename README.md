@@ -10,10 +10,10 @@ A full stack web application made using [Next.js](https://nextjs.org/) and [Supa
 # Getting started
 
 ## Visit Website at
-- [Vercel (Click me!)](https://look-inna-book.vercel.app/)
+- https://look-inna-book.vercel.app/
 
 ## View Related SQL at...
-- [This github repo (Click me!)](https://github.com/andGuo/look-inna-book-sql)
+- https://github.com/andGuo/look-inna-book-sql
 
 ## Bonus Features
 - Account Persistent User Cart
